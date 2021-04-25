@@ -366,8 +366,12 @@
     		// 	}
     		// });
     		new Special_Card('Back', "#111111", ()=>{
-    			show_cards(queue[queue.length-1]);
-    			queue.pop();
+                if(queue.length != 0){
+        			show_cards(queue[queue.length-1]);
+        			queue.pop();
+                }else{
+                    show_cards(default_aac);
+                }
     		});
 
     		new Card("Me", "#00ccff", ["I want", "I want to", "I am", "me", "my"]);
