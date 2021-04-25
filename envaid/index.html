@@ -604,6 +604,11 @@
 
 
             //////////////////////////////////////////////////////////////////            
+            new Special_Card("MyID", "#FF2222", ()=>{
+                window.open("https://getmyid.com/profile/00nDm8FW");
+            });
+
+            //////////////////////////////////////////////////////////////////            
 
 
             element('update').hidden = true;
@@ -630,7 +635,9 @@
 
 
 
-    		default_pages = ["Greeting", "Name / DOB", "Update"];
+
+
+    		default_pages = ["Greeting", "Name / DOB", "MyID","Update"];
 
     		element('pages').innerHTML = "<h1>Pages</h1>";
     		element('pages').onclick = function(){
