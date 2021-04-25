@@ -231,11 +231,12 @@
                 });			
     		}
 
-
+            var page_history = [];
     		var text_history = [];
     		element('clear').onclick = ()=>{
     			output.value = "";
     			text_history = [];
+                page_history = [];
                 resize_output();
     		}
 
@@ -243,6 +244,10 @@
     			if(text_history.length > 0){
     				output.value = text_history[text_history.length-1];
     				text_history.pop();
+
+                    show_cards(page_history[page_history.length-1]);
+                    page_history.pop();
+
                     resize_output();
     			}
     		}
@@ -304,12 +309,14 @@
     				// not folder
 	    			this.element.onclick = function(){
 	    				text_history.push(output.value);
+                        page_history.push(shown_cards);
 	    				output.value += text + " ";
 	    				resize_output();
                         while(queue.length > 0){
                             show_cards(queue[queue.length-1]);
                             queue.pop();
                         }
+                        show_cards(default_aac);
 	    			}
     			}
 
