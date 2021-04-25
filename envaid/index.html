@@ -125,29 +125,76 @@
         		user-select: none;
         	}
 
+            #fullscreens > div > h1{
+                /*line-height: 2vw;*/
+                font-size: 12vw;
+            }
+
+            #fullscreens > div > p {
+                /*line-height: 2vw;*/
+                font-size: 10vw;
+            }
+
+            #fullscreens > div > div {
+                text-align: center;
+                height: 10vw;
+                font-size: 8vw;
+                background-color: #777777;
+                width: 25vw;
+                border-radius: 3vw;
+                border: 10px solid #cccccc;
+                margin: 10px;
+            }
+
+            @media screen and (orientation: landscape) {
+                #fullscreens > h1{
+                    font-size: 8vw;
+                }
+
+                #fullscreens > p {
+                    font-size: 6vw;
+                }
+
+                #fullscreens > div {
+                    height: 6vw;
+                    font-size: 5vw;
+                    width: 16vw;
+                    border-width: 5px;
+                    border-radius: 2vw;
+                }
+            }
+
+            .right {
+                position:absolute;
+                bottom:0;
+                right:0;
+            }
+
+            .left{
+                position:absolute;
+                bottom:0;
+            }
+
+
             /************************************/
 
-        	#Name_DOB > h1{
-        		line-height: 2vw;
-        		font-size: 12vw;
-        	}
+            #greeting > p {
+                font-size: 5vh!important;
+            }
+
+            /************************************/
+
+            #Name_DOB > h1 {
+                line-height: 2vw;
+            }
 
         	#Name_DOB > p {
-        		line-height: 2vw;
-        		font-size: 10vw;
+                line-height: 2vw;
         		font-style: italic;
         	}
 
         	/*close button*/
         	#Name_DOB > div {
-        		text-align: center;
-        		height: 10vw;
-        		font-size: 8vw;
-        		background-color: #777777;
-        		width: 25vw;
-        		border-radius: 3vw;
-        		border: 10px solid #cccccc;
-        		float: right;
         		position:absolute;
     		    bottom:0;
     		    right:0;
@@ -163,80 +210,47 @@
         		#Name_DOB > p {
         			line-height: 2vw;
         			font-size: 6vw;
-        			font-style: italic;
         		}
-
-		    	#Name_DOB > div {
-		    		height: 6vw;
-		    		font-size: 5vw;
-		    		width: 16vw;
-		    		border-width: 5px;
-		    		border-radius: 2vw;
-		    	}
         	}
 
             /************************************/
 
-            #update > h1{
-                /*line-height: 2vw;*/
-                font-size: 12vw;
+
+            #update_online {
+                font-style: italic;
             }
 
-            #update > p{
-                /*line-height: 2vw;*/
-                font-size: 10vw;
-            }
-
-            #update > div {
-                text-align: center;
-                height: 10vw;
-                font-size: 8vw;
-                background-color: #777777;
-                width: 25vw;
-                border-radius: 3vw;
-                position:absolute;
-                /*bottom:0;*/
-                /*right:0;*/
-                margin: 3vw;
-            }
 
             #update_update {
-                border: 10px solid #11ee11;
-                bottom: 0;
+                border: 10px solid #11ee11!important;
             }
 
             #close_update {
-                bottom: 0;
-                right:0;
-                border: 10px solid #ee1111;
+                border: 10px solid #ee1111!important;
             }
 
             @media screen and (orientation: landscape) {
                 #update > h1{
                     line-height: 2vw;
-                    font-size: 8vw;
                 }
 
                 #update > p{
                     line-height: 2vw;
-                    font-size: 6vw;
-                }
-
-                #update > div {
-                    height: 6vw;
-                    font-size: 5vw;
-                    width: 16vw;
-                    border-width: 5px;
-                    border-radius: 2vw;
                 }
             }
-
-
 
         </style>
     </head>
     <body>
     	<div id="fullscreens">
+
+            <div id="greeting">
+                <h1>Hi, I'm Andrew.</h1>
+                <p>Sometimes I am "non-verbal" meaning that is very difficult or even impossible for me to speak.</p>
+                <p>Right now I am non-verbal. This app allows me to communicate. It supports both text and audio communication.</p>
+                <p>Thank you for your cooperation.</p>
+                <div id="close_greeting" class="right">Close</div>
+            </div>
 
 	    	<div id="Name_DOB">
 	    		<p>Name:</p>
@@ -244,15 +258,15 @@
 	    		<br>
 	    		<p>Date of Birth:</p>
 	    		<h1>03/08/2001</h1>
-	    		<div id="close_Name_DOB">Close</div>
+	    		<div id="close_Name_DOB" class="right">Close</div>
 	    	</div>
 
             <div id="update">
                 <h1>Are you sure you want to update?</h1>
                 <p>Make sure you have an internet connection before you do.</p>
                 <p id="update_online">Online</p>
-                <div id="close_update">Close</div>
-                <div id="update_update">Update</div>
+                <div id="close_update" class="right">Close</div>
+                <div id="update_update" class="left">Update</div>
             </div>
 	    </div>
 
@@ -515,6 +529,17 @@
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            element('greeting').hidden = true;
+            element('close_greeting').onclick = function(){
+                element('greeting').hidden = true;
+            }
+
+            new Special_Card('Greeting', "#0099ff", ()=>{
+                element('greeting').hidden = false;
+            });
+
+
+            //////////////////////////////////////////////////////////////////
 
     		element('Name_DOB').hidden = true;
     		element('close_Name_DOB').onclick = function(){
@@ -547,11 +572,11 @@
                 }
             });
 
+            //////////////////////////////////////////////////////////////////  
 
 
-            //////////////////////////////////////////////////////////////////
 
-    		default_pages = ["Name / DOB", "Update"];
+    		default_pages = ["Greeting", "Name / DOB", "Update"];
 
     		element('pages').innerHTML = "<h1>Pages</h1>";
     		element('pages').onclick = function(){
