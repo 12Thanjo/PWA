@@ -12,7 +12,7 @@
         	/* Float four columns side by side */
         	.column {
 				float: left;
-				width: 22vw;
+				width: 31vw;
 				padding: 10px 10px;
         	}
 
@@ -37,7 +37,7 @@
         	.card {
 				text-align: center;
 				background-color: #777777;
-				font-size: 2.5vh;
+				font-size: 2vh;
 				height: 22vw;
 				display: flex;
 				justify-content: center;
@@ -50,12 +50,11 @@
 
         	@media screen and (orientation: landscape) {
         		.column {
-        			width: 22vh;
+        			width: 31vh;
         		}
 
         		.card{
         			height: 22vh;
-        			font-size: 2vw;
         		}
         	}
         	
@@ -209,7 +208,7 @@
     	<div class="row"></div>
     	<br>
     	<br>
-
+        <div id="cards"></div>
 
     	<script type="text/javascript">
     		element = function(str){
@@ -224,9 +223,12 @@
     		}
 
     		resize_output();
-
+            resize_events = new Map();
     		window.onresize = ()=>{
-				resize_output();    			
+				resize_output();    
+                resize_events.forEach((event)=>{
+                    event();
+                });			
     		}
 
 
@@ -234,12 +236,14 @@
     		element('clear').onclick = ()=>{
     			output.value = "";
     			text_history = [];
+                resize_output();
     		}
 
     		element('undo').onclick = function(){
     			if(text_history.length > 0){
     				output.value = text_history[text_history.length-1];
     				text_history.pop();
+                    resize_output();
     			}
     		}
 
@@ -290,7 +294,7 @@
     			this.card.style.borderColor = color;
     			if(folder != null){
     				// is folder
-    				folder = ["Home", "Back", ...folder];
+    				folder = ["Back", ...folder, "Buffer"];
     				this.card.style.backgroundColor = "#505050";
     				this.element.onclick = function(){
     					queue.push(shown_cards);
@@ -302,11 +306,33 @@
 	    				text_history.push(output.value);
 	    				output.value += text + " ";
 	    				resize_output();
+                        while(queue.length > 0){
+                            show_cards(queue[queue.length-1]);
+                            queue.pop();
+                        }
 	    			}
     			}
 
 
-    			body.appendChild(this.element);
+
+                this.size = function(vertical, horizontal){
+                    var element = this;
+                    resize_events.set(this.text, ()=>{
+                        if(window.matchMedia("(orientation: portrait)").matches){
+                            // vertical
+                            element.card.style.fontSize = vertical;
+                        }else{
+                            // horizontal
+                            element.card.style.fontSize = horizontal;
+                        }
+                    });
+                }
+
+                this.size('2vh', '4vh');
+
+
+
+    			element('cards').appendChild(this.element);
 
     			this.show = function(){
     				this.element.hidden = false;
@@ -326,27 +352,80 @@
 
     		////////////////////////////////////////////////////////////////////////////////////////////////
 
-    		new Special_Card('Home', "#000000", ()=>{
+    		// new Special_Card('Start', "#000000", ()=>{
+    		// 	while(queue.length > 0){
+    		// 		show_cards(queue[queue.length-1]);
+    		// 		queue.pop();
+    		// 	}
+    		// });
+    		new Special_Card('Back', "#111111", ()=>{
     			show_cards(queue[queue.length-1]);
     			queue.pop();
     		});
-    		new Special_Card('Back', "#111111", ()=>{
-    			while(queue.length > 0){
-    				show_cards(queue[queue.length-1]);
-    				queue.pop();
-    			}
-    		});
 
-    		new Card("I", "#00ccff", ["I want", "I want to", "I am"]);
-    		new Card("I want", "#00ccff");
-    		new Card("I want to", "#00ccff");
-    		new Card("I am", "#00ccff");
+    		new Card("Me", "#00ccff", ["I want", "I want to", "I am", "me", "my"]);
+        		new Card("I want", "#00ccff");
+        		new Card("I want to", "#00ccff");
+                new Card("me", "#0044ff");
+                new Card("my", "#0044ff");
+        		new Card("I am", "#2288dd");
+            ///////////////////////////////////////////////////////////////////////
+    		new Card('Actions', '#A45EE5', ["Future", "eat", 'go', 'go to', 'help', 'get']);
 
-    		new Card('Verbs', '#A45EE5', ["go", "eat"]);
-    		new Card("go", '#A45EE5');
+            new Card('Future', '#A45EE5', ['going to']);
+            new Card("going to", '#A45EE5');
+
     		new Card("eat", '#A45EE5');
+    		new Card("go", '#A45EE5');
+            new Card("go to", '#A45EE5');
+            new Card("help", '#A45EE5');
+            new Card("get", '#A45EE5');
 
-    		default_aac = ["I", 'Verbs'];
+            ///////////////////////////////////////////////////////////////////////
+            new Card('Locations', "#15ee15", ['Skidmore', 'Home']).size('1.9vh', '3vh');
+
+            new Card("Home", "#88ff88");
+
+            new Card("Skidmore", "#00cc00", ["IT", "Case", "DHall", "Howe", "Zankel"]).size('1.9vh', '3.2vh');
+                new Card("IT", "#00cc00");
+                new Card("Case", "#00cc00");
+                new Card("DHall", "#00cc00");
+                new Card("Howe", "#00cc00");
+                new Card("Zankel", "#00cc00");
+
+            ///////////////////////////////////////////////////////////////////////
+
+            new Card("Things", "#dd1515", ["Food", "Computer", "Trombone"]);
+                new Card("Food", "#dd1515");
+                new Card("Computer", "#dddddd");
+                new Card("Trombone", "#dddd15");
+
+            ///////////////////////////////////////////////////////////////////////
+
+            new Card("People", '#3333ff', ["Specific", 'You', 'Your', "Their"]);
+
+            new Card("Specific", '#00ccff', ["Kylie", "Payton", "Nate", "Feldmom", "Joshua"]);
+                new Card("Kylie", '#00cc00');
+                new Card("Payton", '#00cc00');
+                new Card("Nate", '#00cc00');
+                new Card("Feldmom", '#88ff88');
+                new Card("Joshua", '#88ff88');
+
+
+            new Card("You", "#3333ff");
+            new Card("Your", "#3333ff");
+            new Card("Their", "#3333ff");
+
+
+            ///////////////////////////////////////////////////////////////////////
+
+
+            new Card("Please", "#dddd15");
+            new Card(".", "#dddd15");
+
+            ///////////////////////////////////////////////////////////////////////
+
+    		default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "Please", "."];
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -375,7 +454,19 @@
     		}
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+            var buffer = new Card("Buffer");
+            buffer.card.style.height = "50vw";
+            buffer.card.style.visibility = "hidden";
+            resize_events.forEach((event)=>{
+                event();
+                if(window.matchMedia("(orientation: portrait)").matches){
+                    // vertical
+                    buffer.card.style.height = "50vw";
+                }else{
+                    // horizontal
+                    buffer.card.style.height = "20vh";
+                }
+            });
     		show_cards(default_aac);
     	</script>
 	</body>
