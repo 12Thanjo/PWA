@@ -88,14 +88,14 @@
         		text-align: center;
         	}
 
-        	#clear, #speak, #undo, #special{
+        	#clear, #speak, #undo, #pages{
         		background-color: #555555;
         		width: 25vw;
         		font-size: 2vh;
         		float: left;
         	}
 
-        	#special {
+        	#pages {
         		background-color: #666666;
         	}
 
@@ -109,7 +109,7 @@
         			/*width: 100vw;*/
         		}
 
-        		#clear, #speak, #undo, #special{
+        		#clear, #speak, #undo, #pages{
         			font-size: 1.6vw;
         		}
         	}
@@ -200,7 +200,7 @@
 	    		<div id="speak">
 	    			<h1>Speak</h1>
 	    		</div>
-	    		<div id="special">
+	    		<div id="pages">
 	    			<h1>Special</h1>
 	    		</div>
     		</div>
@@ -406,14 +406,14 @@
 
             ///////////////////////////////////////////////////////////////////////
 
-            new Card("Things", "#dd1515", ["Food", "Computer", "Trombone"]);
-                new Card("Food", "#dd1515");
-                new Card("Computer", "#dddddd");
-                new Card("Trombone", "#dddd15");
+            new Card("Things", "#dd1515", ["food", "computer", "trombone"]);
+                new Card("food", "#dd1515");
+                new Card("computer", "#dddddd");
+                new Card("trombone", "#dddd15");
 
             ///////////////////////////////////////////////////////////////////////
 
-            new Card("People", '#3333ff', ["Names", 'You', 'Your', "Their"]);
+            new Card("People", '#3333ff', ["Names", 'you', 'your', "their"]);
 
             new Card("Names", '#00ccff', ["Kylie", "Payton", "Nate", "Feldmom", "Joshua"]);
                 new Card("Kylie", '#00cc00');
@@ -423,9 +423,9 @@
                 new Card("Joshua", '#88ff88');
 
 
-            new Card("You", "#3333ff");
-            new Card("Your", "#3333ff");
-            new Card("Their", "#3333ff");
+            new Card("you", "#3333ff");
+            new Card("your", "#3333ff");
+            new Card("their", "#3333ff");
 
 
             ///////////////////////////////////////////////////////////////////////
@@ -450,19 +450,25 @@
     			element('Name_DOB').hidden = false;
     		});
 
-    		default_special = ["Name / DOB"];
-    		element('special').innerHTML = "<h1>Special</h1>";
-    		element('special').onclick = function(){
-    			if(this.innerHTML == "<h1>Special</h1>"){
+    		default_pages = ["Name / DOB"];
+    		element('pages').innerHTML = "<h1>Pages</h1>";
+    		element('pages').onclick = function(){
+    			if(this.innerHTML == "<h1>Pages</h1>"){
     				// switch to AAC
     				this.innerHTML = "<h1>AAC</h1>";
-    				show_cards(default_special);
+    				show_cards(default_pages);
     			}else{
-    				// Switch to Special
-    				this.innerHTML = "<h1>Special</h1>";
+    				// Switch to Pages
+    				this.innerHTML = "<h1>Pages</h1>";
     				show_cards(default_aac);
     			}
     		}
+
+            element('output').onblur = function(){
+                if(this.value[this.value.length-1] != " "){
+                    this.value += " ";
+                }
+            }
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
             var buffer = new Card("Buffer");
