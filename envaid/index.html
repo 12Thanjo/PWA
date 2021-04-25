@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="icon.png"/>
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>envaid</title>
+        <style type="text/css">
+        	/* Float four columns side by side */
+        	.column {
+				float: left;
+				width: 22vw;
+				padding: 10px 10px;
+        	}
+
+
+        	/* Clear floats after the columns */
+        	.row:after {
+				content: "";
+				display: table;
+				clear: both;
+        	}
+
+        	/* Responsive columns */
+        	@media screen and (max-width: 600px) {
+				.column {
+					width: 100%;
+					display: block;
+					margin-bottom: 20px;
+				}
+        	}
+
+        	/* Style the counter cards */
+        	.card {
+				text-align: center;
+				background-color: #777777;
+				font-size: 2.5vh;
+				height: 22vw;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: 1vh solid #ffffff;
+				border-radius: 4vh;
+				user-select: none;
+				line-height: 4vh;
+        	}
+
+        	@media screen and (orientation: landscape) {
+        		.column {
+        			width: 22vh;
+        		}
+
+        		.card{
+        			height: 22vh;
+        			font-size: 2vw;
+        		}
+        	}
+        	
+        	/**************************************************************************/
+
+        	body{
+        		margin: 0px;
+        		overflow-x: hidden;
+        		background: #222222;
+        		color: #ffffff;
+        	}
+
+        	#header{
+        		background: #444444;
+        	}
+
+
+        	#output{
+        		width: 88vw;
+        		font-size: 8vh;
+        		background: #444444;
+        		color: #ffffff;
+        		overflow-x: hidden; 
+        		user-select: none;
+        		outline: none;
+        		height: auto;
+        	}
+
+        	#buttons{
+        		display: block;
+        		text-align: center;
+        	}
+
+        	#clear, #speak, #undo, #special{
+        		background-color: #555555;
+        		width: 25vw;
+        		font-size: 2vh;
+        		float: left;
+        	}
+
+        	#special {
+        		background-color: #5f5f5f;
+        	}
+
+        	@media screen and (orientation: landscape) {
+        		#header{
+        			/*width: 90vw;*/
+        		}
+
+        		#output{
+        			font-size: 6vw;
+        			/*width: 100vw;*/
+        		}
+
+        		#clear, #speak, #undo, #special{
+        			font-size: 1.6vw;
+        		}
+        	}
+
+
+        	/********************************************************************************/
+
+        	#fullscreens > div{
+        		background-color: #222222;
+        		width: 100vw;
+        		height: 100vh;
+        		position: absolute;
+        		user-select: none;
+        	}
+
+        	#Name_DOB > h1{
+        		line-height: 2vw;
+        		font-size: 12vw;
+        	}
+
+        	#Name_DOB > p {
+        		line-height: 2vw;
+        		font-size: 10vw;
+        		font-style: italic;
+        	}
+
+        	/*close button*/
+        	#Name_DOB > div {
+        		text-align: center;
+        		height: 10vw;
+        		font-size: 8vw;
+        		background-color: #777777;
+        		width: 25vw;
+        		border-radius: 3vw;
+        		border: 10px solid #cccccc;
+        		float: right;
+        		position:absolute;
+    		    bottom:0;
+    		    right:0;
+    		    margin: 3vw;
+        	}
+
+        	@media screen and (orientation: landscape) {
+        		#Name_DOB > h1{
+        			line-height: 2vw;
+        			font-size: 8vw;
+        		}
+
+        		#Name_DOB > p {
+        			line-height: 2vw;
+        			font-size: 6vw;
+        			font-style: italic;
+        		}
+
+		    	#Name_DOB > div {
+		    		height: 6vw;
+		    		font-size: 5vw;
+		    		width: 16vw;
+		    		border-width: 5px;
+		    		border-radius: 2vw;
+		    	}
+        	}
+
+        </style>
+    </head>
+    <body>
+    	<div id="fullscreens">
+	    	<div id="Name_DOB" disabled="enabled">
+	    		<p>Name:</p>
+	    		<h1>Andrew Feldman</h1>
+	    		<br>
+	    		<p>Date of Birth:</p>
+	    		<h1>03/08/2001</h1>
+	    		<div id="close_Name_DOB" disabled="disabled">
+	    			Close
+	    		</div>
+	    	</div>
+	    </div>
+    	<div id="header">
+    		<textarea id="output" oninput="resize_output()"></textarea>
+    		<div id="buttons">
+	    		<div id="clear">
+	    			<h1>Clear</h1>
+	    		</div>
+	    		<div id="undo">
+	    			<h1>Undo</h1>
+	    		</div>
+	    		<div id="speak">
+	    			<h1>Speak</h1>
+	    		</div>
+	    		<div id="special">
+	    			<h1>Special</h1>
+	    		</div>
+    		</div>
+    	</div>
+    	<div class="row"></div>
+    	<br>
+    	<br>
+
+
+    	<script type="text/javascript">
+    		element = function(str){
+    			return document.getElementById(str);
+    		}
+
+
+    		var output = element('output');
+    		resize_output = function(){
+    		    output.style.height = "5px";
+    		    output.style.height = (output.scrollHeight)+"px";
+    		}
+
+    		resize_output();
+
+    		window.onresize = ()=>{
+				resize_output();    			
+    		}
+
+
+    		var text_history = [];
+    		element('clear').onclick = ()=>{
+    			output.value = "";
+    			text_history = [];
+    		}
+
+    		element('undo').onclick = function(){
+    			if(text_history.length > 0){
+    				output.value = text_history[text_history.length-1];
+    				text_history.pop();
+    			}
+    		}
+
+
+    		var ssu = new SpeechSynthesisUtterance();
+    		var voices = window.speechSynthesis.getVoices();
+    		ssu.voice = voices[6];
+    		ssu.volume = 1; // From 0 to 1
+    		ssu.rate = 1; // From 0.1 to 10
+    		ssu.pitch = 1; // From 0 to 2
+    		ssu.text = "";
+    		ssu.lang = 'en';
+    		var speak = function(){
+    			ssu.text = output.value;
+    			speechSynthesis.speak(ssu);
+    		}
+
+    		element('speak').onclick = ()=>{
+    			speak();
+    		}
+
+    		////////////////////////////////////////////////////////////////////////////////
+
+
+    		var body = document.getElementsByTagName('body')[0];
+    		cards = new Map();
+
+    		var shown_cards = [];
+    		show_cards = function(folder){	
+    			shown_cards.forEach((card)=>{
+    				cards.get(card).hide();
+    			});
+
+    			folder.forEach((card)=>{
+    				cards.get(card).show();
+    			});
+
+    			shown_cards = folder;
+    		}
+
+    		var queue = [];
+
+    		Card = function(text, color, folder){
+    			this.text = text;
+    			this.element = document.createElement('div');
+    			this.element.innerHTML = `<div class="column"><div class="card"><h1>${text}</h1></div></div>`;
+    			this.card = this.element.childNodes[0].children[0];
+    			this.card.style.borderColor = color;
+    			if(folder != null){
+    				// is folder
+    				folder = ["Home", "Back", ...folder];
+    				this.card.style.backgroundColor = "#505050";
+    				this.element.onclick = function(){
+    					queue.push(shown_cards);
+    					show_cards(folder);
+    				}
+    			}else{
+    				// not folder
+	    			this.element.onclick = function(){
+	    				text_history.push(output.value);
+	    				output.value += text + " ";
+	    				resize_output();
+	    			}
+    			}
+
+
+    			body.appendChild(this.element);
+
+    			this.show = function(){
+    				this.element.hidden = false;
+    			}
+
+    			this.hide = function(){
+    				this.element.hidden = true;
+    			}
+
+    			shown_cards.push(text);
+    			cards.set(text, this);
+    		}
+
+    		Special_Card = function(text, color, func){
+    			new Card(text, color).element.onclick = func;
+    		}
+
+    		////////////////////////////////////////////////////////////////////////////////////////////////
+
+    		new Special_Card('Home', "#000000", ()=>{
+    			show_cards(queue[queue.length-1]);
+    			queue.pop();
+    		});
+    		new Special_Card('Back', "#111111", ()=>{
+    			while(queue.length > 0){
+    				show_cards(queue[queue.length-1]);
+    				queue.pop();
+    			}
+    		});
+
+    		new Card("I", "#00ccff", ["I want", "I want to", "I am"]);
+    		new Card("I want", "#00ccff");
+    		new Card("I want to", "#00ccff");
+    		new Card("I am", "#00ccff");
+
+    		new Card('Verbs', '#A45EE5', ["go", "eat"]);
+    		new Card("go", '#A45EE5');
+    		new Card("eat", '#A45EE5');
+
+    		default_aac = ["I", 'Verbs'];
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    		element('Name_DOB').hidden = true;
+    		element('close_Name_DOB').onclick = function(){
+    			element('Name_DOB').hidden = true;
+    		}
+
+    		new Special_Card('Name / DOB', "#aaaaaa", ()=>{
+    			element('Name_DOB').hidden = false;
+    		});
+
+    		default_special = ["Name / DOB"];
+    		element('special').innerHTML = "<h1>Special</h1>";
+    		element('special').onclick = function(){
+    			if(this.innerHTML == "<h1>Special</h1>"){
+    				// switch to AAC
+    				this.innerHTML = "<h1>AAC</h1>";
+    				show_cards(default_special);
+    			}else{
+    				// Switch to Special
+    				this.innerHTML = "<h1>Special</h1>";
+    				show_cards(default_aac);
+    			}
+    		}
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    		show_cards(default_aac);
+    	</script>
+	</body>
+</html>
