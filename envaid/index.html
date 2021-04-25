@@ -619,8 +619,10 @@
                 element('update').hidden = false;
                 if(window.navigator.onLine){
                     element('update_online').innerHTML = "Online";
+                    element('update_online').style.color = "#00dd00";
                 }else{
                     element('update_online').innerHTML = "Offline";
+                    element('update_online').style.color = "#dd0000";
                 }
             });
 
