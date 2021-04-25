@@ -42,7 +42,7 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				border: 1vh solid #ffffff;
+				border: 1vh solid #000000;
 				border-radius: 4vh;
 				user-select: none;
 				line-height: 4vh;
@@ -476,23 +476,30 @@
                 }
     		});
 
-    		new Card("Me", "#00ccff", ["I want", "I want to", "I am", "me", "my"]);
+    		new Card("Me", "#00ccff", ["I want", "I want to", "I am", "me", "my", "I"]);
         		new Card("I want", "#00ccff");
         		new Card("I want to", "#00ccff");
                 new Card("me", "#0044ff");
                 new Card("my", "#0044ff");
         		new Card("I am", "#2288dd");
+                new Card("I", "#33ffff");
             ///////////////////////////////////////////////////////////////////////
-    		new Card('Actions', '#A45EE5', ["Future", "eat", 'go', 'go to', 'help', 'get']);
+    		new Card('Actions', '#A45EE5', ["Future", "Sports", "eat", 'go', 'go to', 'help', 'get']);
 
-                new Card('Future', '#A45EE5', ['going to']);
-                    new Card("going to", '#A45EE5');
+                new Card('Future', '#33aaff', ['going to', 'will']);
+                    new Card("going to", '#f4aEf5');
+                    new Card("will", '#A45EE5');
+
+                new Card("Sports", "#11ff11", ["run", "tennis"]);
+                    new Card("run", '#ffff00').text = "go for a run";
+                    new Card("tennis", "#11ff11").text = "play tennis";
 
         		new Card("eat", '#A45EE5');
-        		new Card("go", '#A45EE5');
-                new Card("go to", '#A45EE5');
-                new Card("help", '#A45EE5');
+        		new Card("go", '#f4aEf5');
+                new Card("go to", '#f4aEf5');
                 new Card("get", '#A45EE5');
+                new Card("help", '#ff0044');
+
 
             ///////////////////////////////////////////////////////////////////////
 
@@ -502,16 +509,25 @@
                 new Card("trombone", "#dddd15");
 
             ///////////////////////////////////////////////////////////////////////
-            new Card('Locations', "#15ee15", ['Skidmore', 'Home']).size(1.9, 3);
+            new Card('Locations', "#15ee15", ['Skidmore', 'Home', "Supermarket"]).size(1.9, 3);
 
                 new Card("Home", "#88ff88");
 
-                new Card("Skidmore", "#00cc00", ["IT", "Case", "DHall", "Howe", "Zankel"]).size(1.9, 3.2);
-                    new Card("IT", "#00cc00");
-                    new Card("Case", "#00cc00");
-                    new Card("DHall", "#00cc00");
-                    new Card("Howe", "#00cc00");
-                    new Card("Zankel", "#00cc00");
+                new Card("Skidmore", "#00cc00", ["Trails", "Apartment", "IT", "Case", "DHall", "Howe", "Zankel"]).size(1.9, 3.2);
+                    new Card("Trails", "#cc9911", ['North Woods', "SMBA"]);
+                        new Card("North Woods", "#cc9911");
+                        new Card("SMBA", "#cc9911").text = "the SMBA trails";
+                    new Card("Apartment", "#11ee11", ['my __', 'our __', 'the __']).size(1.6, 2.8);
+                        new Card("my __", "#11ee11").text = 'my Apartment';
+                        new Card("our __", "#11ee11").text = 'our Apartment';
+                        new Card("the __", "#11ee11").text = 'the Apartment';
+                    new Card("IT", "#009900");
+                    new Card("Case", "#009900");
+                    new Card("DHall", "#009900");
+                    new Card("Howe", "#009900");
+                    new Card("Zankel", "#009900");
+
+                new Card("Supermarket", "#A45EE5").size(1.3, 2.4).text = "the Supermarket";
 
 
             ///////////////////////////////////////////////////////////////////////
@@ -535,19 +551,25 @@
             new Card("ND", "#ff1111", ["Panic", "Anxiety", "overwhelmed", "over stimulated"]);
                 new Card("Panic", "#ff1111").text = "having a panic attack";
                 new Card("Anxiety", "#ff1111").text = "having an anxiety attack";;
-                new Card("overwhelmed", "#ff1111").size(1.3, 2.4);
-                new Card("over stimulated", "#ff1111").size(1.6, 2.9).text = "over-stimulated";
+                new Card("overwhelmed", "#dd660f").size(1.3, 2.4);
+                new Card("over stimulated", "#dd660f").size(1.6, 2.9).text = "over-stimulated";
 
 
             ///////////////////////////////////////////////////////////////////////
 
+            new Card("Time", "#dddddd", ["now", 'later', 'soon']);
+                new Card("now", "#dddddd");
+                new Card("later", "#dddddd");
+                new Card("soon", "#dddddd");
 
+
+            ///////////////////////////////////////////////////////////////////////
             new Card("Please", "#555555");
             new Card(".", "#555555");
 
             ///////////////////////////////////////////////////////////////////////
 
-    		default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "ND", "Please", "."];
+    		default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "ND", "Time", "Please", "."];
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
