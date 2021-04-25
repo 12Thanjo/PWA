@@ -392,7 +392,7 @@
     		var queue = [];
 
     		Card = function(text, color, folder){
-    			this.text = text;
+    			this.output = text;
     			this.element = document.createElement('div');
     			this.element.innerHTML = `<div class="column"><div class="card"><h1>${text}</h1></div></div>`;
     			this.card = this.element.childNodes[0].children[0];
@@ -411,7 +411,7 @@
 	    			this.element.onclick = function(){
 	    				text_history.push(output.value);
                         page_history.push(shown_cards);
-	    				output.value += card.text + " ";
+	    				output.value += card.output + " ";
 	    				resize_output();
                         while(queue.length > 0){
                             show_cards(queue[queue.length-1]);
@@ -425,7 +425,7 @@
 
                 this.size = function(vertical, horizontal){
                     var element = this;
-                    resize_events.set(this.text, ()=>{
+                    resize_events.set(this.output, ()=>{
                         if(window.matchMedia("(orientation: portrait)").matches){
                             // vertical
                             element.card.style.fontSize = vertical + "vh";
@@ -438,6 +438,14 @@
                 }
 
                 this.size(2, 4);
+
+                this.text = function(text){
+                    this.output = text;
+                }
+
+                this.label = function(text){
+                    this.card.childNodes[0].innerHTML = text;
+                }
 
     			element('cards').appendChild(this.element);
 
@@ -491,8 +499,8 @@
                     new Card("will", '#A45EE5');
 
                 new Card("Sports", "#11ff11", ["run", "tennis"]);
-                    new Card("run", '#ffff00').text = "go for a run";
-                    new Card("tennis", "#11ff11").text = "play tennis";
+                    new Card("run", '#ffff00').text("go for a run");
+                    new Card("tennis", "#11ff11").text("play tennis");
 
         		new Card("eat", '#A45EE5');
         		new Card("go", '#f4aEf5');
@@ -516,18 +524,18 @@
                 new Card("Skidmore", "#00cc00", ["Trails", "Apartment", "IT", "Case", "DHall", "Howe", "Zankel"]).size(1.9, 3.2);
                     new Card("Trails", "#cc9911", ['North Woods', "SMBA"]);
                         new Card("North Woods", "#cc9911");
-                        new Card("SMBA", "#cc9911").text = "the SMBA trails";
-                    new Card("Apartment", "#11ee11", ['my __', 'our __', 'the __']).size(1.6, 2.8);
-                        new Card("my __", "#11ee11").text = 'my Apartment';
-                        new Card("our __", "#11ee11").text = 'our Apartment';
-                        new Card("the __", "#11ee11").text = 'the Apartment';
+                        new Card("SMBA", "#cc9911").text("the SMBA trails");
+                    new Card("Apartment", "#11ee11", ['my apartment', 'our apartment', 'the apartment']).size(1.6, 2.8);
+                        new Card("my apartment", "#11ee11").label("my");
+                        new Card("our apartment", "#11ee11").label("our");
+                        new Card("the apartment", "#11ee11").label("the");
                     new Card("IT", "#009900");
                     new Card("Case", "#009900");
                     new Card("DHall", "#009900");
                     new Card("Howe", "#009900");
                     new Card("Zankel", "#009900");
 
-                new Card("Supermarket", "#A45EE5").size(1.3, 2.4).text = "the Supermarket";
+                new Card("Supermarket", "#A45EE5").size(1.3, 2.4).text("the Supermarket");
 
 
             ///////////////////////////////////////////////////////////////////////
@@ -549,10 +557,10 @@
             ///////////////////////////////////////////////////////////////////////
 
             new Card("ND", "#ff1111", ["Panic", "Anxiety", "overwhelmed", "over stimulated"]);
-                new Card("Panic", "#ff1111").text = "having a panic attack";
-                new Card("Anxiety", "#ff1111").text = "having an anxiety attack";;
+                new Card("Panic", "#ff1111").text("having a panic attack");
+                new Card("Anxiety", "#ff1111").text("having an anxiety attack");
                 new Card("overwhelmed", "#dd660f").size(1.3, 2.4);
-                new Card("over stimulated", "#dd660f").size(1.6, 2.9).text = "over-stimulated";
+                new Card("over stimulated", "#dd660f").size(1.6, 2.9).text("over-stimulated");
 
 
             ///////////////////////////////////////////////////////////////////////
