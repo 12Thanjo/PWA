@@ -125,6 +125,8 @@
         		user-select: none;
         	}
 
+            /************************************/
+
         	#Name_DOB > h1{
         		line-height: 2vw;
         		font-size: 12vw;
@@ -173,21 +175,87 @@
 		    	}
         	}
 
+            /************************************/
+
+            #update > h1{
+                /*line-height: 2vw;*/
+                font-size: 12vw;
+            }
+
+            #update > p{
+                /*line-height: 2vw;*/
+                font-size: 10vw;
+            }
+
+            #update > div {
+                text-align: center;
+                height: 10vw;
+                font-size: 8vw;
+                background-color: #777777;
+                width: 25vw;
+                border-radius: 3vw;
+                position:absolute;
+                /*bottom:0;*/
+                /*right:0;*/
+                margin: 3vw;
+            }
+
+            #update_update {
+                border: 10px solid #11ee11;
+                bottom: 0;
+            }
+
+            #close_update {
+                bottom: 0;
+                right:0;
+                border: 10px solid #ee1111;
+            }
+
+            @media screen and (orientation: landscape) {
+                #update > h1{
+                    line-height: 2vw;
+                    font-size: 8vw;
+                }
+
+                #update > p{
+                    line-height: 2vw;
+                    font-size: 6vw;
+                }
+
+                #update > div {
+                    height: 6vw;
+                    font-size: 5vw;
+                    width: 16vw;
+                    border-width: 5px;
+                    border-radius: 2vw;
+                }
+            }
+
+
+
         </style>
     </head>
     <body>
     	<div id="fullscreens">
-	    	<div id="Name_DOB" disabled="enabled">
+
+	    	<div id="Name_DOB">
 	    		<p>Name:</p>
 	    		<h1>Andrew Feldman</h1>
 	    		<br>
 	    		<p>Date of Birth:</p>
 	    		<h1>03/08/2001</h1>
-	    		<div id="close_Name_DOB" disabled="disabled">
-	    			Close
-	    		</div>
+	    		<div id="close_Name_DOB">Close</div>
 	    	</div>
+
+            <div id="update">
+                <h1>Are you sure you want to update?</h1>
+                <p>Make sure you have an internet connection before you do.</p>
+                <p id="update_online">Online</p>
+                <div id="close_update">Close</div>
+                <div id="update_update">Update</div>
+            </div>
 	    </div>
+
     	<div id="header">
     		<textarea id="output" oninput="resize_output()"></textarea>
     		<div id="buttons">
@@ -269,6 +337,12 @@
     		element('speak').onclick = ()=>{
     			speak();
     		}
+
+            element('output').onblur = function(){
+                if(this.value[this.value.length-1] != " "){
+                    this.value += " ";
+                }
+            }
 
     		////////////////////////////////////////////////////////////////////////////////
 
@@ -394,8 +468,8 @@
 
             ///////////////////////////////////////////////////////////////////////
 
-            new Card("Things", "#dd1515", ["food", "computer", "trombone"]);
-                new Card("food", "#dd1515");
+            new Card("Things", "#dddd15", ["food", "computer", "trombone"]);
+                new Card("food", "#dddd15");
                 new Card("computer", "#dddddd");
                 new Card("trombone", "#dddd15");
 
@@ -451,7 +525,34 @@
     			element('Name_DOB').hidden = false;
     		});
 
-    		default_pages = ["Name / DOB"];
+
+            //////////////////////////////////////////////////////////////////            
+
+
+            element('update').hidden = true;
+            element('close_update').onclick = function(){
+                element('update').hidden = true;
+            }
+
+            element('update_update').onclick = function(){
+                location.reload();
+            }
+
+            new Special_Card('Update', "#004499", ()=>{
+                element('update').hidden = false;
+                if(window.navigator.onLine){
+                    element('update_online').innerHTML = "Online";
+                }else{
+                    element('update_online').innerHTML = "Offline";
+                }
+            });
+
+
+
+            //////////////////////////////////////////////////////////////////
+
+    		default_pages = ["Name / DOB", "Update"];
+
     		element('pages').innerHTML = "<h1>Pages</h1>";
     		element('pages').onclick = function(){
     			if(this.innerHTML == "<h1>Pages</h1>"){
@@ -465,11 +566,7 @@
     			}
     		}
 
-            element('output').onblur = function(){
-                if(this.value[this.value.length-1] != " "){
-                    this.value += " ";
-                }
-            }
+
 
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
             var buffer = new Card("Buffer");
