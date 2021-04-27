@@ -9,6 +9,12 @@
         <meta charset="UTF-8"/>
         <title>envaid</title>
         <style type="text/css">
+
+            html{
+                font-family: "Times New Roman", "Serif";
+            }
+
+
         	/* Float four columns side by side */
         	.column {
 				float: left;
@@ -90,14 +96,14 @@
         		text-align: center;
         	}
 
-        	#clear, #speak, #undo, #pages{
+        	#clear, #speak, #undo, #tools{
         		background-color: #555555;
         		width: 25vw;
         		font-size: 2vh;
         		float: left;
         	}
 
-        	#pages {
+        	#tools {
         		background-color: #666666;
         	}
 
@@ -111,13 +117,18 @@
         			/*width: 100vw;*/
         		}
 
-        		#clear, #speak, #undo, #pages{
+        		#clear, #speak, #undo, #tools{
         			font-size: 1.6vw;
         		}
         	}
 
 
         	/********************************************************************************/
+
+            #fullscreens{
+                font-family: "Helvetica", "Sans-serif";
+                color: #eeeeee;
+            }
 
         	#fullscreens > div{
         		background-color: #222222;
@@ -130,11 +141,13 @@
             #fullscreens > div > h1{
                 /*line-height: 2vw;*/
                 font-size: 12vw;
+                padding: 0 30px;
             }
 
             #fullscreens > div > p {
                 /*line-height: 2vw;*/
                 font-size: 10vw;
+                padding: 0 30px;
             }
 
             #fullscreens > div > div {
@@ -145,7 +158,8 @@
                 width: 25vw;
                 border-radius: 3vw;
                 border: 10px solid #cccccc;
-                margin: 10px;
+                margin: 30px;
+                /*padding: 30px;*/
             }
 
             @media screen and (orientation: landscape) {
@@ -180,8 +194,18 @@
 
             /************************************/
 
+            #greeting h1 {
+                line-height: 3vh!important;
+                color: #999999;
+            }
+
             #greeting > p {
-                font-size: 5vh!important;
+                font-size: 5.2vh!important;
+            }
+
+            #greeting > p > span {
+                font-style: italic;
+                color: #cccccc;
             }
 
             @media screen and (orientation: landscape) {
@@ -197,12 +221,14 @@
             /************************************/
 
             #Name_DOB > h1 {
-                line-height: 2vw;
+                line-height: 15vw;
+                font-size: 18vw!important;
             }
 
         	#Name_DOB > p {
                 line-height: 2vw;
         		font-style: italic;
+                color: #cccccc;
         	}
 
         	/*close button*/
@@ -215,8 +241,8 @@
 
         	@media screen and (orientation: landscape) {
         		#Name_DOB > h1{
-        			line-height: 2vw;
-        			font-size: 8vw;
+        			line-height: 15vh;
+                    font-size: 18vh!important;
         		}
 
         		#Name_DOB > p {
@@ -251,6 +277,24 @@
                 }
             }
 
+
+
+
+            /*********************************************************/
+
+            #maximize_text{
+                font-size: 18vw;
+                line-height: 19vw;
+            }
+
+            @media screen and (orientation: landscape) {
+                #maximize_text{
+                    font-size: 18vh;
+                    line-height: 19vh;
+                }
+            }
+
+
         </style>
     </head>
     <body>
@@ -258,9 +302,9 @@
 
             <div id="greeting">
                 <h1>Hi, I'm Andrew.</h1>
-                <p>Sometimes I am "non-verbal" meaning that is very difficult or even impossible for me to speak.</p>
-                <p>Right now I am non-verbal. This app allows me to communicate. It supports both text and audio communication.</p>
-                <p>Thank you for your cooperation.</p>
+                <p>Sometimes I am <span>"non-verbal"</span>, meaning that is very difficult or even impossible for me to speak.</p>
+                <p>Right now I am <span>non-verbal</span>. This app allows me to communicate. It supports both <span>text</span> and <span>audio</span> communication.</p>
+                <p><span>Thank you for your cooperation.</span></p>
                 <div id="close_greeting" class="right">Close</div>
             </div>
 
@@ -280,6 +324,12 @@
                 <div id="close_update" class="right">Close</div>
                 <div id="update_update" class="left">Update</div>
             </div>
+
+            <div id="maximize">
+                <h1 id="maximize_text" style="font-size: 18vw;"></h1>
+                <div id="close_maximize" class="right">Close</div>
+            </div>
+
 	    </div>
 
     	<div id="header">
@@ -294,7 +344,7 @@
 	    		<div id="speak">
 	    			<h1>Speak</h1>
 	    		</div>
-	    		<div id="pages">
+	    		<div id="tools">
 	    			<h1>Special</h1>
 	    		</div>
     		</div>
@@ -303,8 +353,31 @@
     	<br>
     	<br>
         <div id="cards"></div>
-
+        <script src="NoSleep.js"></script>
+        <script src="./colors.js"></script>
     	<script type="text/javascript">
+            // new NoSleep().enable()
+
+            // var noSleep = new NoSleep();
+            // noSleep.enable(); // keep the screen on!
+
+          // var wakeLockEnabled = false;
+          // var toggleEl = document.querySelector("#toggle");
+          // toggleEl.addEventListener('click', function() {
+          //   if (!wakeLockEnabled) {
+          //     wakeLockEnabled = true;
+          //     toggleEl.value = "Wake Lock is enabled";
+          //     // document.body.style.backgroundColor = "green";
+          //   } else {
+          //     noSleep.disable(); // let the screen turn off.
+          //     wakeLockEnabled = false;
+          //     toggleEl.value = "Wake Lock is disabled";
+          //     // document.body.style.backgroundColor = "";
+          //   }
+          // }, false);
+
+
+
     		element = function(str){
     			return document.getElementById(str);
     		}
@@ -325,12 +398,12 @@
                 });			
     		}
 
-            var page_history = [];
+            var tool_history = [];
     		var text_history = [];
     		element('clear').onclick = ()=>{
     			output.value = "";
     			text_history = [];
-                page_history = [];
+                tool_history = [];
                 resize_output();
     		}
 
@@ -339,8 +412,8 @@
     				output.value = text_history[text_history.length-1];
     				text_history.pop();
 
-                    show_cards(page_history[page_history.length-1]);
-                    page_history.pop();
+                    show_cards(tool_history[tool_history.length-1]);
+                    tool_history.pop();
 
                     resize_output();
     			}
@@ -410,7 +483,7 @@
                     var card = this;
 	    			this.element.onclick = function(){
 	    				text_history.push(output.value);
-                        page_history.push(shown_cards);
+                        tool_history.push(shown_cards);
 	    				output.value += card.output + " ";
 	    				resize_output();
                         while(queue.length > 0){
@@ -441,10 +514,12 @@
 
                 this.text = function(text){
                     this.output = text;
+                    return this;
                 }
 
                 this.label = function(text){
                     this.card.childNodes[0].innerHTML = text;
+                    return this;
                 }
 
     			element('cards').appendChild(this.element);
@@ -469,206 +544,7 @@
 
     		////////////////////////////////////////////////////////////////////////////////////////////////
 
-    		// new Special_Card('Start', "#000000", ()=>{
-    		// 	while(queue.length > 0){
-    		// 		show_cards(queue[queue.length-1]);
-    		// 		queue.pop();
-    		// 	}
-    		// });
-    		new Special_Card('Back', "#111111", ()=>{
-                if(queue.length != 0){
-        			show_cards(queue[queue.length-1]);
-        			queue.pop();
-                }else{
-                    show_cards(default_aac);
-                }
-    		});
-
-    		new Card("Me", "#00ccff", ["I want", "I want to", "I am", "me", "my", "I"]);
-        		new Card("I want", "#00ccff");
-        		new Card("I want to", "#00ccff");
-                new Card("me", "#0044ff");
-                new Card("my", "#0044ff");
-        		new Card("I am", "#2288dd");
-                new Card("I", "#33ffff");
-            ///////////////////////////////////////////////////////////////////////
-    		new Card('Actions', '#A45EE5', ["Future", "Sports", "eat", 'go', 'go to', 'help', 'get']);
-
-                new Card('Future', '#33aaff', ['going to', 'will']);
-                    new Card("going to", '#f4aEf5');
-                    new Card("will", '#A45EE5');
-
-                new Card("Sports", "#11ff11", ["run", "tennis"]);
-                    new Card("run", '#ffff00').text("go for a run");
-                    new Card("tennis", "#11ff11").text("play tennis");
-
-        		new Card("eat", '#A45EE5');
-        		new Card("go", '#f4aEf5');
-                new Card("go to", '#f4aEf5');
-                new Card("get", '#A45EE5');
-                new Card("help", '#ff0044');
-
-
-
-            ///////////////////////////////////////////////////////////////////////
-            new Card('Locations', "#15ee15", ['Skidmore', 'Home', "Supermarket"]).size(1.8, 3);
-
-                new Card("Home", "#88ff88");
-
-                new Card("Skidmore", "#00cc00", ["Trails", "Apartment", "IT", "Case", "DHall", "Howe", "Zankel"]).size(1.9, 3.2);
-                    new Card("Trails", "#cc9911", ['North Woods', "SMBA"]);
-                        new Card("North Woods", "#cc9911");
-                        new Card("SMBA", "#cc9911").text("the SMBA trails");
-                    new Card("Apartment", "#11ee11", ['my apartment', 'our apartment', 'the apartment']).size(1.6, 2.8);
-                        new Card("my apartment", "#11ee11").label("my");
-                        new Card("our apartment", "#11ee11").label("our");
-                        new Card("the apartment", "#11ee11").label("the");
-                    new Card("IT", "#009900");
-                    new Card("Case", "#009900");
-                    new Card("DHall", "#009900");
-                    new Card("Howe", "#009900");
-                    new Card("Zankel", "#009900");
-
-                new Card("Supermarket", "#A45EE5").size(1.3, 2.4).text("the Supermarket");
-
-            ///////////////////////////////////////////////////////////////////////
-
-            new Card("Things", "#dddd15", ["food", "computer", "trombone"]);
-                new Card("food", "#dddd15");
-                new Card("computer", "#dddddd");
-                new Card("trombone", "#dddd15");
-
-            ///////////////////////////////////////////////////////////////////////
-
-            new Card("People", '#3333ff', ["Names", 'you', 'your', "their"]);
-
-                new Card("Names", '#00ccff', ["Kylie", "Payton", "Nate", "Feldmom", "Joshua"]);
-                    new Card("Kylie", '#00cc00');
-                    new Card("Payton", '#00cc00');
-                    new Card("Nate", '#00cc00');
-                    new Card("Feldmom", '#88ff88');
-                    new Card("Joshua", '#88ff88');
-
-
-                new Card("you", "#3333ff");
-                new Card("your", "#3333ff");
-                new Card("their", "#3333ff");
-
-            ///////////////////////////////////////////////////////////////////////
-
-            new Card("ND", "#ff1111", ["Panic", "Anxiety", "overwhelmed", "over stimulated"]);
-                new Card("Panic", "#ff1111").text("having a panic attack");
-                new Card("Anxiety", "#ff1111").text("having an anxiety attack");
-                new Card("overwhelmed", "#dd660f").size(1.3, 2.4);
-                new Card("over stimulated", "#dd660f").size(1.6, 2.9).text("over-stimulated");
-
-
-            ///////////////////////////////////////////////////////////////////////
-
-            new Card("Time", "#dddddd", ["now", 'later', 'soon']);
-                new Card("now", "#dddddd");
-                new Card("later", "#dddddd");
-                new Card("soon", "#dddddd");
-
-
-            ///////////////////////////////////////////////////////////////////////
-            new Card("Please", "#555555");
-            new Card(".", "#555555");
-
-            ///////////////////////////////////////////////////////////////////////
-
-    		default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "ND", "Time", "Please", "."];
-
-    		///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            element('greeting').hidden = true;
-            element('close_greeting').onclick = function(){
-                element('greeting').hidden = true;
-            }
-
-            new Special_Card('Greeting', "#0099ff", ()=>{
-                element('greeting').hidden = false;
-            }).size(2, 3.4);
-
-
-            //////////////////////////////////////////////////////////////////
-
-    		element('Name_DOB').hidden = true;
-    		element('close_Name_DOB').onclick = function(){
-    			element('Name_DOB').hidden = true;
-    		}
-
-    		new Special_Card('Name / DOB', "#aaaaaa", ()=>{
-    			element('Name_DOB').hidden = false;
-    		});
-
-
-            //////////////////////////////////////////////////////////////////            
-            new Special_Card("MyID", "#FF2222", ()=>{
-                window.open("https://getmyid.com/profile/00nDm8FW");
-            });
-
-            //////////////////////////////////////////////////////////////////            
-
-
-            element('update').hidden = true;
-            element('close_update').onclick = function(){
-                element('update').hidden = true;
-            }
-
-            element('update_update').onclick = function(){
-                location.reload();
-            }
-
-            new Special_Card('Update', "#004499", ()=>{
-                element('update').hidden = false;
-                if(window.navigator.onLine){
-                    element('update_online').innerHTML = "Online";
-                    element('update_online').style.color = "#00dd00";
-                }else{
-                    element('update_online').innerHTML = "Offline";
-                    element('update_online').style.color = "#dd0000";
-                }
-            });
-
-            //////////////////////////////////////////////////////////////////  
-
-
-
-
-
-    		default_pages = ["Greeting", "Name / DOB", "MyID","Update"];
-
-    		element('pages').innerHTML = "<h1>Pages</h1>";
-    		element('pages').onclick = function(){
-    			if(this.innerHTML == "<h1>Pages</h1>"){
-    				// switch to AAC
-    				this.innerHTML = "<h1>AAC</h1>";
-    				show_cards(default_pages);
-    			}else{
-    				// Switch to Pages
-    				this.innerHTML = "<h1>Pages</h1>";
-    				show_cards(default_aac);
-    			}
-    		}
-
-
-
-    		///////////////////////////////////////////////////////////////////////////////////////////////////////
-            var buffer = new Card("Buffer");
-            buffer.card.style.height = "50vw";
-            buffer.card.style.visibility = "hidden";
-            resize_events.forEach((event)=>{
-                event();
-                if(window.matchMedia("(orientation: portrait)").matches){
-                    // vertical
-                    buffer.card.style.height = "50vw";
-                }else{
-                    // horizontal
-                    buffer.card.style.height = "20vh";
-                }
-            });
-    		show_cards(default_aac);
     	</script>
+        <script type="text/javascript" src="cards.js"></script>
 	</body>
 </html>
