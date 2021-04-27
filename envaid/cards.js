@@ -157,14 +157,8 @@ new Card("Punctuation", darker_gray, ["?", ".", ","]).size(1.4, 2.5);
     new Card(".", dark_gray);
     new Card(",", dark_gray);
 
-new Card("Connectors", navy, ["the", "a", "an", "but"]).size(1.5, 2.7);
-    new Card("the", cyan);
-    new Card("a", blue);
-    new Card("an", blue);
-    new Card("but", navy)
 
-
-default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "Questions", "Feelings", "Amount", "ND", "Punctuation", "Connectors"];
+default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "Questions", "Feelings", "Amount", "ND", "Punctuation"];
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
