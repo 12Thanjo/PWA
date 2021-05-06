@@ -536,7 +536,11 @@
                     this.element.onclick = function(){
                         text_history.push(output.value);
                         tool_history.push(shown_cards);
-                        output.value += card.output;
+                        if(output.value[output.value.length-1] == " "){
+                            output.value = output.value.substring(0, output.value.length-1);
+                        }
+                        output.value += card.output + " ";
+                        resize_output();
                     }
                     return this;
                 }
