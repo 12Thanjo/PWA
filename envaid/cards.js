@@ -14,152 +14,195 @@ new Special_Card('Back', "#111111", ()=>{
 });
 
 // Me
-new Card("Me", cyan, ["I __", "me", "my", "I"]);
-    new Card("I", teal);
-    new Card("I __", teal, ["I want __", "I am", "I have"]);
-        new Card("I want __", cyan, ["I want", "I want to", "I want a", "I want some"]).label("want");
-            new Card("I want", cyan).label("want");
-            new Card("I want to", blue).label("to");
-            new Card("I want a", blue).label("a");
-            new Card("I want some", blue).label("some");
-        new Card("I am", gray_blue);
-        new Card("I have", navy);
-    new Card("me", blue);
-    new Card("my", blue);
+new Card("Me", cyan).folder().size(5).label("🤵🏻");
+    new Card("I", teal, "Me");
+    new Card("I __", teal, "Me").folder();
+        new Card("I want __", cyan, "I __").folder().label("want");
+            new Card("I want", cyan, "I want __").label("want");
+            new Card("I want to", blue, "I want __").label("to");
+            new Card("I want a", blue, "I want __").label("a");
+            new Card("I want some", blue, "I want __").label("some");
+        new Card("I need", purple, "I __").folder().label("need");
+            new Card("I need need", dark_purple, "I need").label("need").text("I need");
+            new Card("I need to", purple, "I need").label("to");
+            new Card("I need some", purple, "I need").label("some");
+        new Card("I am", gray_blue, "I __").label("am");
+        new Card("I have", navy, "I __").label("have");
+    new Card("me", blue, "Me");
+    new Card("my", blue, "Me");
 
 // Actions
-new Card('Actions', purple, ["Future", "Sports", "eat", 'go', 'go to', 'help', 'get', 'sleep']);
-    new Card('Future', gray_blue, ['going to', 'will']);
-        new Card("going to", pink).size(2, 3.8);
-        new Card("will", purple);
-    new Card("Sports", green, ["run", "tennis"]);
-        new Card("run", yellow).text("go for a run");
-        new Card("tennis", green).text("play tennis");
-	new Card("eat", purple);
-	new Card("go", pink);
-    new Card("go to", pink);
-    new Card("get", dark_purple);
-    new Card("sleep", navy);
-    new Card("help", muted_red);
+new Card('Actions', purple).folder().size(1.4);
+    new Card('Future', gray_blue, "Actions").folder();
+        new Card("going to", pink, "Future").size(2);
+        new Card("will", purple, 'Future');
+    new Card("Sports", green, "Actions").folder();
+        new Card("run", yellow, "Sports").text("run").label("🏃🏻‍♂️").size(5);
+        new Card("tennis", green, "Sports").text("play tennis").label("🎾").size(5);
+    new Card("get", dark_purple, "Actions");
+	new Card("eat", purple, "Actions").label("🍽").size(5);
+    new Card("coding", cyan, "Actions").label("💻").size(5);
+    new Card("sleep", navy, "Actions").label("😴").size(5);
+    new Card("help", muted_red, "Actions");
+	new Card("go", pink, "Actions");
+    new Card("go to", pink, "Actions");
 
-// Locations
-new Card('Locations', green, ['Skidmore', 'Home', "Supermarket", "CVS"]).size(1.8, 3);
-    new Card("Home", light_green);
-    new Card("Skidmore", dark_green, ["Trails", "Apartment", "IT", "Case", "DHall", "Howe", "Zankel"]).size(1.8, 3.2);
-        new Card("Trails", brown, ['North Woods', "SMBA"]);
-            new Card("North Woods", brown);
-            new Card("SMBA", brown).text("the SMBA trails");
-        new Card("Apartment", light_green, ['my apartment', 'our apartment', 'the apartment']).size(1.6, 2.7);
-            new Card("my apartment", light_green).label("my");
-            new Card("our apartment", light_green).label("our");
-            new Card("the apartment", light_green).label("the");
-        new Card("IT", dark_green);
-        new Card("Case", dark_green);
-        new Card("DHall", dark_green);
-        new Card("Howe", dark_green);
-        new Card("Zankel", dark_green);
-    new Card("Supermarket", purple).size(1.3, 2.4).text("the Supermarket");
-    new Card("CVS", muted_red);
+// Places
+new Card('Places', green).size(4).folder().label("🏘");
+    new Card("Home", light_green, "Places").label("🏡").size(5);
+    new Card("Skidmore", dark_green, "Places").folder().image("skidmore");
+        new Card("Skidmore Skidmore", dark_green, "Skidmore").image("skidmore").text("Skidmore");
+        new Card("Trails", brown, "Skidmore").folder();
+            new Card("North Woods", brown, "Trails");
+            new Card("SMBA", brown, 'Trails').text("the SMBA trails");
+        new Card("Apartment", light_green, "Skidmore").size(1).folder();
+            new Card("my apartment", light_green, "Apartment").label("my");
+            new Card("our apartment", light_green, "Apartment").label("our");
+            new Card("the apartment", light_green, "Apartment").label("the");
+        new Card("IT", dark_green, "Skidmore");
+        new Card("Case", dark_green, "Skidmore");
+        new Card("DHall", dark_green, "Skidmore");
+        new Card("Howe", dark_green, "Skidmore");
+        new Card("Zankel", dark_green, "Skidmore");
+    new Card("Supermarket", purple, "Places").size(4).text("the Supermarket").label("🛒");
+    new Card("CVS", muted_red, "Places").size(2.4);
 
 // Things
-new Card("Things", dark_yellow, ["food", "computer", "trombone"]);
-    new Card("food", dark_green);
-    new Card("computer", gray).size(1.8, 3.2);
-    new Card("trombone", dark_yellow).size(1.8, 3.2);
+new Card("Things", dark_yellow).folder().size(1.4);
+    new Card("food", dark_green, "Things").folder().label("🍽").size(5);
+        new Card("food food", dark_green, "food").text("food").label("food");
+        new Card("pizza", muted_yellow, "food").label("🍕").size(5);
+        new Card("icecream", muted_yellow, "food").label("🍦").size(5);
+    new Card("computer", gray, "Things").label("💻").size(5);
+    new Card("trombone", dark_yellow, "Things").image("trombone");
 
 // People
-new Card("People", muted_blue, ["Names", 'you', 'your', "their", "our"]);
-    new Card("Names", cyan, ["Kylie", "Payton", "Nate", "Feldmom", "Joshua"]);
-        new Card("Kylie", dark_green);
-        new Card("Payton", dark_green);
-        new Card("Nate", dark_green);
-        new Card("Feldmom", orange).size(1.8, 3.2);
-        new Card("Joshua", orange);
-    new Card("you", muted_blue);
-    new Card("your", muted_blue);
-    new Card("their", muted_blue);
-    new Card("our", sky);
+new Card("People", muted_blue).folder().label("👨‍👩‍👧‍👦").size(5);
+    new Card("Names", cyan, "People").folder();
+        new Card("Kylie", dark_green, "Names").image('kylie');
+        new Card("Payton", dark_green, "Names").image("payton");
+        new Card("Nate", dark_green, "Names").image('nate');
+        new Card("Feldmom", orange, "Names").image('feldmom');
+        new Card("Joshua", orange, "Names").image('joshua');
+    new Card("you", muted_blue, "People");
+    new Card("your", muted_blue, "People");
+    new Card("their", muted_blue, "People");
+    new Card("our", sky, "People");
+    new Card("we", muted_blue, "People");
 
 // Questions
-new Card("Questions", pink, ["who", "what", "where", "when", "why", "how", "is", 'please', "can"]).size(1.7, 3.2);
-    new Card("who", pink, ["who is", 'who are', 'who who']);
-        new Card("who is", pink).label("is").text("who is");
-        new Card("who are", pink).label("are").text("who are");
-        new Card("who who", pink).label("who").text("who");
-    new Card("what", pink, ["what is", 'what are', 'what what']);
-        new Card("what is", pink).label("is").text("what is");
-        new Card("what are", pink).label("are").text("what are");
-        new Card("what what", pink).label("what").text("what");
-    new Card("where", pink, ["where is", 'where are', 'where where']);
-        new Card("where is", pink).label("is").text("where is");
-        new Card("where are", pink).label("are").text("where are");
-        new Card("where where", pink).label("where").text("where");
-    new Card("when", pink, ["when is", 'when are', 'when when']);
-        new Card("when is", pink).label("is").text("when is");
-        new Card("when are", pink).label("are").text("when are");
-        new Card("when when", pink).label("when").text("when");
-    new Card("why", pink, ["why is", 'why are', 'why why']);
-        new Card("why is", pink).label("is").text("why is");
-        new Card("why are", pink).label("are").text("why are");
-        new Card("why why", pink).label("why").text("why");
-    new Card("how", pink, ["how is", 'how are', 'how how']);
-        new Card("how is", pink).label("is").text("how is");
-        new Card("how are", pink).label("are").text("how are");
-        new Card("how how", pink).label("how").text("how");
-    new Card("is", cyan);
-    new Card("please", cyan);
-    new Card("can", cyan, ["can I", "can we", "can can"]);
-        new Card("can I").label("I");
-        new Card("can we").label("we");
-        new Card("can can").label("can");
+new Card("Questions", pink).folder().label("?").size(5);
+    new Card("who", pink, "Questions").folder();
+        new Card("who is", pink, "who").label("is").text("who is");
+        new Card("who are", pink, "who").label("are").text("who are");
+        new Card("who who", pink, "who").label("who").text("who");
+    new Card("what", pink, "Questions").folder();
+        new Card("what is", pink, "what").label("is").text("what is");
+        new Card("what are", pink, "what").label("are").text("what are");
+        new Card("what what", pink, "what").label("what").text("what");
+    new Card("where", pink, "Questions").folder();
+        new Card("where is", pink, "where").label("is").text("where is");
+        new Card("where are", pink, "where").label("are").text("where are");
+        new Card("where where", pink, "where").label("where").text("where");
+    new Card("when", pink, "Questions").folder();
+        new Card("when is", pink, "when").label("is").text("when is");
+        new Card("when are", pink, "when").label("are").text("when are");
+        new Card("when when", pink, "when").label("when").text("when");
+    new Card("why", pink, "Questions").folder();
+        new Card("why is", pink, "why").label("is").text("why is");
+        new Card("why are", pink, "why").label("are").text("why are");
+        new Card("why why", pink, "why").label("why").text("why");
+    new Card("how", pink, "Questions").folder();
+        new Card("how is", pink, "how").label("is").text("how is");
+        new Card("how are", pink, "how").label("are").text("how are");
+        new Card("how how", pink, "how").label("how").text("how");
+    new Card("is", cyan, "Questions");
+    new Card("please", cyan, "Questions");
+    new Card("can", cyan, "Questions").folder();
+        new Card("can I", cyan, 'can').label("I").folder();
+            new Card("can I I", blue, "can I").label("I");
+            new Card("can I have", cyan, "can I").label("have");
+            new Card("can I go", cyan, "can I").label("go");
+            new Card("can I get", cyan, "can I").label("get");
+        new Card("can we", cyan, "can").label("we").folder();
+            new Card("can we I", blue, "can we").label("we");
+            new Card("can we have", cyan, "can we").label("have");
+            new Card("can we go", cyan, "can we").label("go");
+            new Card("can we get", cyan, "can we").label("get");
+        new Card("can can", blue, 'can').label("can").text("can");
 
 // Feelings
-new Card("Feelings", orange, ["like", "don't like", "happy", "sad", "tired"]).size(2, 3.8);
-    new Card("like", muted_yellow);
-    new Card("don't like", muted_red);
-    new Card("happy", yellow);
-    new Card("sad", blue);
-    new Card("tired", navy);
+new Card("Feelings", orange).folder().size(1.2);
+    new Card("like", muted_yellow, "Feelings").label("👍🏻").size(5).folder();
+       new Card("like like", muted_yellow, "like").label("like");
+       new Card("like good", muted_yellow, "like").label("good");
+    new Card("bad", muted_red, "Feelings").label("👎🏻").size(5).folder();
+        new Card("bad like", muted_yellow, "bad").label("don't like");
+        new Card("bad bad", muted_yellow, "bad").label("bad");
+    new Card("happy", yellow, "Feelings").label("😃").size(5);
+    new Card("sad", blue, "Feelings").label("😢").size(5);
+    new Card("tired", navy, "Feelings").label("😴").size(5);
 
 // Amount
-new Card("Amount", gray, ["Time", "a little", "a lot", "very"]).size(2, 3.8);
-    new Card("Time", gray, ["Days", "now", 'later', 'soon']);
-        new Card("Days", gray, ['yesterday', 'today', 'tomorrow']);
-            new Card("yesterday", gray).size(1.8, 3);
-            new Card("today", gray);
-            new Card("tomorrow", gray).size(1.8, 3);
-        new Card("now", gray);
-        new Card("later", gray);
-        new Card("soon", gray);
-    new Card("a little", gray);
-    new Card("a lot", gray);
-    new Card("very", gray);
+new Card("Amount", gray).size(4).folder().label("#");
+    new Card("number", sky, "Amount").folder();
+        new Card("7", sky, "number").no_back();
+        new Card("8", sky, "number").no_back();
+        new Card("9", sky, "number").no_back();
+        new Special_Card("number Home", dark_gray, ()=>{
+            show_cards(default_aac);
+        }, 'number').label("Home");
+        new Card("4", sky, "number").no_back();
+        new Card("5", sky, "number").no_back();
+        new Card("6", sky, "number").no_back();
+        new Card("number $", darker_gray, 'number').label('$').text("$").no_back();
+        new Card("1", sky, "number").no_back();
+        new Card("2", sky, "number").no_back();
+        new Card("3", sky, "number").no_back();
+        new Card("number ,", darker_gray, 'number').label(',').text(",").no_back();
+        new Card("number .", darker_gray, 'number').label('.').text(".").no_back();
+        new Card("0", sky).no_back();
+    new Card("Time", gray, "Amount").folder();
+        new Card("Days", gray, "Time").folder();
+            new Card("yesterday", gray, "Days").size(1.8);
+            new Card("today", gray, "Days");
+            new Card("tomorrow", gray, "Days").size(1.8);
+        new Card("now", gray, "Time");
+        new Card("later", gray, "Time");
+        new Card("soon", gray, "Time");
+    new Card("a little", gray, "Amount");
+    new Card("a lot", gray, "Amount");
+    new Card("very", gray, "Amount");
+    new Card("some", gray, "Amount");
+    new Card("more", gray_blue, "Amount");
+    new Card("less", gray_blue, "Amount");
 
 
 // ND
-new Card("ND", red, ["having Panic", "having Anxiety", "unsafe", "overwhelmed", "over stimulated", "Disabilities"]);
-    new Card("having Panic", red).text("having a panic attack").label("Panic");
-    new Card("having Anxiety", red).text("having an anxiety attack").label("Anxiety");
-    new Card("unsafe", red);
-    new Card("overwhelmed", muted_orange).size(1.3, 2.3);
-    new Card("over stimulated", muted_orange).size(1.6, 2.9).text("over-stimulated");
-    new Card("Disabilities", muted_yellow, ["Anxiety", "MDD", "ADHD", "OCD", "Autism"]).size(1.6, 2.7);
-        new Card("Anxiety", muted_yellow);
-        new Card("MDD", muted_yellow);
-        new Card("ADHD", muted_yellow);
-        new Card("OCD", muted_yellow);
-        new Card("Autism", muted_orange);
+new Card("ND", red).folder().size(3, 3);
+    new Card("having Panic", red, "ND").text("having a panic attack").label("Panic");
+    new Card("having Anxiety", red, "ND").text("having an anxiety attack").label("Anxiety");
+    new Card("unsafe", red, "ND");
+    new Card("over- whelmed", muted_orange, "ND").size(1.2);
+    new Card("over stimulated", muted_orange, "ND").size(1.1).text("over-stimulated");
+    new Card("Disabilities", muted_yellow, "ND").size(1).folder();
+        new Card("Anxiety", muted_yellow, "Disabilities");
+        new Card("MDD", muted_yellow, "Disabilities");
+        new Card("ADHD", muted_yellow, "Disabilities");
+        new Card("OCD", muted_yellow, "Disabilities");
+        new Card("Autism", muted_orange, "Disabilities");
 
 
 // Punctuation
-new Card("Punctuation", darker_gray, ["?", ".", ","]).size(1.4, 2.5);
-    new Card("?", dark_gray);
-    new Card(".", dark_gray);
-    new Card(",", dark_gray);
+new Card("Punctuation", darker_gray).size(0.9).folder();
+    new Card("?", dark_gray, "Punctuation");
+    new Card(".", dark_gray, "Punctuation");
+    new Card(",", dark_gray, "Punctuation");
 
 
-default_aac = ["Me", 'Actions', 'Locations', "Things", "People", "Questions", "Feelings", "Amount", "ND", "Punctuation"];
+default_aac = ["Me", 'Actions', 'Places', "Things", "People", "Questions", "Feelings", "Amount", "ND", "Punctuation"];
 
+// alert(screen.width * window.devicePixelRatio);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 element('greeting').hidden = true;
@@ -169,7 +212,7 @@ element('close_greeting').onclick = function(){
 
 new Special_Card('Greeting', sky, ()=>{
     element('greeting').hidden = false;
-}).size(2, 3.4);
+}).size(5).label("👋🏻");
 
 
 //////////////////////////////////////////////////////////////////
@@ -204,6 +247,31 @@ var no_sleep_card = new Special_Card("No Sleep", dark_red, ()=>{
 
 //////////////////////////////////////////////////////////////////            
 
+element('maximize').hidden = true;
+element('close_maximize').onclick = function(){
+    element("maximize").hidden = true;
+}
+
+var maximize_card = new Special_Card("Maximize", cyan, ()=>{
+    if(output.value != ""){
+        element('maximize').hidden = false;
+        element('maximize_text').innerHTML = output.value;
+    }else{
+        maximize_card.card.style.backgroundColor = muted_red;
+        setTimeout(()=>{
+            maximize_card.card.style.backgroundColor = "#777777";
+        },300);
+    }
+}).size(5).label("📄");
+
+
+//////////////////////////////////////////////////////////////////  
+
+new Special_Card("MyID", red, ()=>{
+    window.open("https://getmyid.com/profile/00nDm8FW");
+}).size(2);
+
+//////////////////////////////////////////////////////////////////
 
 element('update').hidden = true;
 element('close_update').onclick = function(){
@@ -223,33 +291,7 @@ new Special_Card('Update', navy, ()=>{
         element('update_online').innerHTML = "Offline";
         element('update_online').style.color = muted_red;
     }
-});
-
-//////////////////////////////////////////////////////////////////  
-
-new Special_Card("MyID", red, ()=>{
-    window.open("https://getmyid.com/profile/00nDm8FW");
-});
-
-//////////////////////////////////////////////////////////////////
-
-
-element('maximize').hidden = true;
-element('close_maximize').onclick = function(){
-    element("maximize").hidden = true;
-}
-
-var maximize_card = new Special_Card("Maximize", cyan, ()=>{
-    if(output.value != ""){
-        element('maximize').hidden = false;
-        element('maximize_text').innerHTML = output.value;
-    }else{
-        maximize_card.card.style.backgroundColor = muted_red;
-        setTimeout(()=>{
-            maximize_card.card.style.backgroundColor = "#777777";
-        },300);
-    }
-}).size(1.7,3.1);
+}).size(1.5);
 
 
 //////////////////////////////////////////////////////////////////  
