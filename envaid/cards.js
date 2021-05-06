@@ -161,7 +161,7 @@ new Card("Amount", gray).size(4).folder().label("#");
         new Card("3", sky, "number").no_back();
         new Card("number ,", darker_gray, 'number').label(',').text(",").no_back();
         new Card("number .", darker_gray, 'number').label('.').text(".").no_back();
-        new Card("0", sky).no_back();
+        new Card("0", sky, 'number').no_back();
     new Card("Time", gray, "Amount").folder();
         new Card("Days", gray, "Time").folder();
             new Card("yesterday", gray, "Days").size(1.8);
