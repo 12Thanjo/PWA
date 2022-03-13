@@ -43,3 +43,9 @@ DOM("#reload").on('click', @()->{
 });
 
 DOM("#date").innerHTML += Date.now() + " <  Don't worry about this, Olivia :)";
+
+
+
+
+
+macro "cards";

@@ -14,6 +14,9 @@
 		<style type="text/css">
 
 			body{
+				overflow: hidden;
+				overflow-y: auto;
+
 				margin: 0px;
 				overflow-x: hidden;
 
@@ -41,7 +44,6 @@
 			#buttons{
 				display: block;
 				text-align: center;
-
 			}
 
 			#up, #down, #clear{
@@ -61,6 +63,16 @@
 				width: 50vw;
 				font-size: 3vw;
 			}
+
+
+
+
+			#cards{
+				display: block;
+				text-align: center;
+				float: left;
+			}
+
 			
 		</style>
 	</head>
@@ -77,15 +89,16 @@
 	    		<div id="down">
 	    			<h1>↓</h1>
 	    		</div>
-
-
-
     		</div>
 
+    		<div id="cards"></div>
 
 		</div>
 
-
+		<br />
+		<br />
+		<br />
+		
 		<div id="reload" onclick="location.reload()">
 			<h1>Reload</h1>
 			<p id="date"></p>

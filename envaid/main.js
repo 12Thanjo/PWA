@@ -29,3 +29,45 @@ DOM("#reload").on('click',()=>{
 	location.reload(); //42:20 | main.nt
 }); //41:18 | main.nt
 DOM("#date").innerHTML+=Date.now()+" <  Don't worry about this, Olivia :)"; //45:4 | main.nt
+let cards_div=DOM("#cards"); //2:16 | cards.ntm
+let Card=function(name,event){
+	let $this=this;let private={};this.$op={};Card.$map.set(name,this);
+	private.name=name; //5:12 | cards.ntm
+	private.event=event; //6:12 | cards.ntm
+	private.element=DOM.createElement("div",cards_div); //9:12 | cards.ntm
+	private.element.css({
+		width:window.innerWidth/4-20,
+		height:window.innerWidth/4-20,
+		margin:5,
+		backgroundColor:DOM.color.gray._700,
+		borderRadius:6,
+		border:"5px solid "+DOM.color.gray._900,
+		display:"flex",
+		float:"left",
+		justifyContent:"center",
+		alignItems:"center"
+	}); //10:24 | cards.ntm
+	private.element.innerHTML=name; //25:12 | cards.ntm
+	private.element.on("click",()=>{
+		private.event(); //28:22 | cards.ntm
+	}); //27:23 | cards.ntm
+}; //4:8 | cards.ntm
+Card.$map=new Map();Card.get=function(id){return Card.$map.get(id);};Card.has=function(id){return Card.$map.has(id);};Card.forEach=function(cb){Card.$map.forEach(cb);};Card.delete=function(cb){Card.$map.delete(cb);}; //4:8 | cards.ntm
+new Card("Card 1",()=>{
+	textarea.value="1"; //39:34 | cards.ntm
+}); //39:11 | cards.ntm
+new Card("Card 2",()=>{
+	textarea.value="2"; //40:34 | cards.ntm
+}); //40:11 | cards.ntm
+new Card("Card 3",()=>{
+	textarea.value="3"; //41:34 | cards.ntm
+}); //41:11 | cards.ntm
+new Card("Card 4",()=>{
+	textarea.value="4"; //42:34 | cards.ntm
+}); //42:11 | cards.ntm
+new Card("Card 5",()=>{
+	textarea.value="5"; //43:34 | cards.ntm
+}); //43:11 | cards.ntm
+new Card("Card 6",()=>{
+	textarea.value="6"; //44:34 | cards.ntm
+}); //44:11 | cards.ntm
