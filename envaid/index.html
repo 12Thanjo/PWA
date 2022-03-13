@@ -26,8 +26,9 @@
 			#textarea {
 				width: calc(100% - 20px);
 				margin: 0px;
-				border: 0px;
+				border-width: 0px;
 				padding: 10px;
+				outline: none;
 
 				background: var(--coolGray_700);
 				color: var(--coolGray_50);
@@ -40,19 +41,31 @@
 			#buttons{
 				display: block;
 				text-align: center;
+
 			}
+
 			#up, #down, #speak, #tools{
 				background-color: #555555;
-				width: 25vw;
-				font-size: 2vw;
+				height: 15vw;
 				float: left;
+				margin: 0px;
+			}
+
+			#up, #down{
+				width: 20vw;
+				font-size: 3vw;
+			}
+
+			#speak, #tools{
+				width: 30vw;
+				font-size: 3vw;
 			}
 			
 		</style>
 	</head>
 	<body>
 		<div id="header">
-			<textarea id="textarea"></textarea>
+			<textarea id="textarea" oninput="resize_textarea()"></textarea>
 			<div id="buttons">
 	    		<div id="up">
 	    			<h1>↑</h1>
@@ -61,16 +74,14 @@
 	    			<h1>↓</h1>
 	    		</div>
 	    		<div id="speak">
-	    			<h1>Speak</h1>
+	    			<h1>{Speak}</h1>
 	    		</div>
 	    		<div id="tools">
-	    			<h1>Special</h1>
+	    			<h1>{Special}</h1>
 	    		</div>
     		</div>
 		</div>
 
-
-		<button onclick="location.reload()">Reload</button>
 
 
 		<script type="text/javascript" src="main.js"></script>

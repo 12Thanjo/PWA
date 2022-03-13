@@ -1,0 +1,51 @@
+import ferry;
+
+
+ferry.get("/", @(req, res)->{
+	res.send("PWA Server");
+});
+
+
+ferry.get("/envaid", @(req, res)->{
+	res.sendFile(__dirname + "/envaid/index.html");
+});
+
+
+ferry.get("/colors.css", @(req, res)->{
+	res.sendFile(__dirname + "/envaid/colors.css");
+});
+ferry.get("/main.js", @(req, res)->{
+	res.sendFile(__dirname + "/envaid/main.js");
+});
+
+
+
+ferry.start();
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+
+local os = require("os");
+
+
+local nets = os.networkInterfaces();
+local results = {};
+
+forKeys nets(name, net){
+	forKeys net(i, sub_net){
+		if(sub_net.family == "IPv4"){
+			if(results[name] == null){
+				results[name] = [];
+			};
+			results[name].push(sub_net.address);
+		};
+	};
+};
+
+console.log("-------------------------");
+forKeys results(key, address){
+	console.log(key, address);	
+};
+console.log("-------------------------");
