@@ -28,4 +28,4 @@ DOM("#clear").on("click",()=>{
 DOM("#reload").on('click',()=>{
 	location.reload(); //42:20 | main.nt
 }); //41:18 | main.nt
-DOM("#date").innerHTML+=Date.now(); //45:4 | main.nt
+DOM("#date").innerHTML+=Date.now()+" <  Don't worry about this, Olivia :)"; //45:4 | main.nt

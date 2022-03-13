@@ -42,4 +42,4 @@ DOM("#reload").on('click', @()->{
 	location.reload();
 });
 
-DOM("#date").innerHTML += Date.now();
+DOM("#date").innerHTML += Date.now() + " <  Don't worry about this, Olivia :)";
