@@ -7,8 +7,31 @@ console.log(`Localhost Server Started on Port: ${httpPort}`);
 
 serv.listen(httpPort);
 app.use('/envaid', express.static('envaid'));
+app.use('/flappybird', express.static('flappy bird'));
 
 
+
+
+// explorer
+
+app.use('/explorer', (req, res)=>{
+    res.sendFile(__dirname + "/explore.html");
+});
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+app.use((req, res, next)=>{
+    if(req.query.pass == "20000leagues"){
+        next();
+    }else{
+        res.sendStatus(403);
+    }
+});
+
+
+app.use('/explore', express.static('C:/Users/andre/OneDrive/programming/'));
 
 
 

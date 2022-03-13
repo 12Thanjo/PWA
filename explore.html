@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Explorer</title>
+</head>
+<body>
+	<h1>Explorer</h1>
+	<input type="text" id="pass" placeholder="pass">
+	<input type="text" id="url" placeholder="url">
+	<button id='button'>Go</button>
+	<script type="text/javascript">
+		var pass = document.getElementById('pass');
+		var url = document.getElementById('url');
+		var button = document.getElementById('button');
+
+		button.onclick = ()=>{
+			location.replace(`http://${location.host}/explore/${url.value}?pass=${pass.value}`);
+		};
+	</script>
+</body>
+</html>

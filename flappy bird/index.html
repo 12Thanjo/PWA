@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" id="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<head>
+	<title>Flappy Bird</title>
+	<style type="text/css">
+		body {
+			margin: 0px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<script src="./virtuosity-libs.js"></script>
+	<script src="./virtuosity.js"></script>
+	<script type="text/javascript">
+		bottom = window.innerHeight * 0.8;
+		right = window.innerWidth;
+		var time_step = 1/64;
+		var time_step_squared = time_step * time_step;
+
+
+		var pipe_count = 0;
+		var pipes = new Map();
+		class Pipe{
+			_x;
+			constructor(){
+				this.id = pipe_count;
+				pipe_count += 1;
+				pipes.set(this.id, this);
+
+				this._x = right + (right * 0.01798);
+
+				var position = Math.floor(Math.random()*5+1);
+				while(position > 5){
+					var position = Math.floor(Math.random()*5+1);
+				}
+
+				this.position = (bottom * 0.3) / 5 * position + (bottom * 0.3);
+
+
+				this.top_collision = new collisionManager.shape.Box(right + (right * 0.01798), 0, right * 0.237, this.position - (bottom * 0.2));
+				var self = this;
+				this.top = {x: 0}
+				engine2d.add.image("main", 'top'+ self.id, right + (right * 0.01798), 0, 'pipe', (img)=>{
+					self.top = img;
+					self.top.width = right * 0.237;
+					self.top.height = (self.position - (bottom * 0.2)) * -1;
+					self.top.anchor.y = 1;
+				});
+				this.top_lip = {x: 0}
+				engine2d.add.image("main", 'top lip'+ self.id, right + (right * 0.01798), self.position - (bottom * 0.2), 'pipe lip', (img)=>{
+					self.top_lip = img;
+					self.top_lip.width = right * 0.237;
+					self.top_lip.height = right * 0.1;
+					self.top_lip.anchor.y = 1;
+				});
+
+				this.bottom_collision = new collisionManager.shape.Box(right + (right * 0.01698), this.position + (bottom * 0.143), right * 0.237, bottom - (this.position + (bottom * 0.20)) );
+				this.bottom = {x: 0}
+				engine2d.add.image("main", 'bottom'+ self.id, right + (right * 0.01798), this.position + (bottom * 0.2), 'pipe', (img)=>{
+					self.bottom = img;
+					self.bottom.width = right * 0.25; 
+					self.bottom.height = bottom - (self.position + (bottom * 0.2));
+				});
+				this.bottom_lip = {x: 0}
+				engine2d.add.image("main", 'bottom lip'+ self.id, right + (right * 0.01798), this.position + (bottom * 0.2), 'pipe lip', (img)=>{
+					self.bottom_lip = img;
+					self.bottom_lip.width = right * 0.237;
+					self.bottom_lip.height = right * 0.1;
+					self.bottom_lip.anchor.y = 1;
+				});
+
+
+				Object.defineProperty(this, "x", {
+					get: ()=>{
+						return this._x;
+					},
+					set: (val)=>{
+						this._x = val;
+						this.top.x = val;
+						this.top_lip.x = val;
+						this.bottom.x = val;
+						this.bottom_lip.x = val;
+					}
+				});
+
+
+				this.added = false;
+				this.scored = false;
+			}
+
+
+			destroy(){
+				// engine2d.graphics.delete.shape('top' + this.id, 'main');
+				// engine2d.graphics.delete.shape('bottom' + this.id, 'main');
+				engine2d.delete.image('main', 'top' + this.id);
+				engine2d.delete.image('main', 'top lip' + this.id);
+				engine2d.delete.image('main', 'bottom' + this.id);
+				engine2d.delete.image('main', 'bottom lip' + this.id);
+				pipes.delete(this.id);
+			}
+		}
+
+
+
+
+		var end_game = function(){
+			alert("Game Over");
+			bird.y = bottom / 2;
+			bird.velocity = 0;
+
+			pipes.forEach((pipe)=>{
+				pipe.destroy();
+				pipes.delete(pipe.id);
+			});
+			score.text = 0;
+			new Pipe();
+		}
+
+
+		engine2d.newCanvas('main', {
+			width: window.innerWidth,
+			height: window.innerHeight,
+			preload: ()=>{
+				engine2d.loadQueue.image('main', 'pipe', "./pipe.png");
+				engine2d.loadQueue.image('main', 'pipe lip', "./pipe lip.png");
+			},
+			create: ()=>{
+				engine2d.graphics.add.container("main", "main");
+				engine2d.graphics.add.rectangle("background", "main", 0, 0, window.innerWidth, window.innerHeight, 0x87CEEB);
+				engine2d.graphics.add.rectangle("grass", "main", 0, bottom, window.innerWidth, window.innerHeight * 0.2, 0x009900);
+				engine2d.graphics.add.ellipse("bird", "main", right / 2, bottom / 2, right * 0.079, right * 0.0647, 0xffff00);
+
+				engine2d.add.text("main", "score", right / 2, window.innerHeight * 0.9, 0, right * 0.1798, (text)=>{
+					score = text;
+					score.anchor.x = 0.5;
+					score.anchor.y = 0.5;
+					score.strokeThickness = Math.floor(right * 0.01798);
+					score.fontFamily = "Arial";
+				});
+
+
+				bird = engine2d.graphics.get("bird", "main");
+				bird.collision = new collisionManager.shape.Circle(bird.x, bird.y, right * 0.0647);
+
+				bird.gravity = right * -0.0234;
+				bird.velocity = 0;
+
+				inputManager.enable();
+				inputManager.keyboard.add.keyDown("jump", ["SPACE"], ()=>{
+				// inputManager.mouse.add.leftDown('jump', ()=>{
+					// bird.y -= 1;
+					bird.velocity = right * 0.00719;
+				});
+
+				document.addEventListener('touchstart', ()=>{
+					bird.velocity = right * 0.00719;
+				});
+
+				new Pipe();
+			},
+			update: ()=>{
+				if(bird.y > bottom - (right * 0.0899)){
+					bird.y = bottom - (right * 0.0899);
+					end_game();
+				}
+
+				if(bird.y < bottom - (right * 0.0899)){
+					bird.y -= ((bird.velocity * time_step) + (0.5 * bird.gravity * time_step_squared)) * (right * 0.356);
+					bird.velocity = bird.velocity + (time_step * bird.gravity);
+				}
+
+
+				pipes.forEach((pipe)=>{
+					pipe.x -= right * 0.0044964029;
+
+					if(pipe.x < right * 0.1798){
+						if(pipe.added == false){
+							new Pipe();
+							pipe.added = true;
+						}
+						if(pipe.x < right * -0.252){
+							pipe.destroy();
+						}
+					}else if(pipe.x < right / 2 - (right * 0.2698) && pipe.scored == false){
+						pipe.scored = true;
+						score.text += 1;
+					}
+				});
+
+				bird.collision.y = bird.y;
+				pipes.forEach((pipe)=>{
+					pipe.top_collision.x = pipe.top.x;
+					pipe.bottom_collision.x = pipe.bottom.x;
+
+					if(collisionManager.collision.boxCircle(pipe.top_collision, bird.collision)){
+						end_game();
+					}
+					if(collisionManager.collision.boxCircle(pipe.bottom_collision, bird.collision)){
+						end_game();
+					}
+				});
+			}
+		});
+	</script>
+</body>
+</html>
