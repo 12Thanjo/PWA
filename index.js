@@ -23,7 +23,7 @@ app.use(express.urlencoded({
 }));
 
 app.use((req, res, next)=>{
-    if(req.query.pass == "20000leagues"){
+    if(req.query.pass == process.env.NodeServerPassword){
         next();
     }else{
         res.sendStatus(403);
