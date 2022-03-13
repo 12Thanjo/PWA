@@ -4,5 +4,8 @@ import DOM;
 
 local textarea = DOM("textarea");
 
-textarea.focus();
+
+textarea.on("touchend", @()->{
+	textarea.focus();
+});
 
