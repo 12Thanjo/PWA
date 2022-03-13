@@ -13,7 +13,6 @@ textarea.style("fontSize", fontsize);
 resize_textarea = function(){
 	textarea.style('height', 5);
 	textarea.style('height', textarea.element.scrollHeight - 20);
-	console.log("hi");
 };
 resize_textarea();
 
@@ -37,9 +36,6 @@ DOM("#down").on("click", @()->{
 DOM("#clear").on("click", @()->{
 	textarea.value = "";
 	resize_textarea();
-});
-DOM("#reload").on('click', @()->{
-	location.reload();
 });
 
 DOM("#date").innerHTML += Date.now() + " <  Don't worry about this, Olivia :)";

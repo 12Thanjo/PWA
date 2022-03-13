@@ -8,66 +8,75 @@ textarea.style("fontSize",fontsize); //7:15 | main.nt
 resize_textarea=function(){ //13:26 | main.nt
 	textarea.style('height',5); //14:19 | main.nt
 	textarea.style('height',textarea.element.scrollHeight-20); //15:19 | main.nt
-	console.log("hi"); //16:16 | main.nt
 }; //13:16 | main.nt
-resize_textarea(); //18:16 | main.nt
+resize_textarea(); //17:16 | main.nt
 DOM("#up").on("click",()=>{
-	fontsize+=5; //25:13 | main.nt
-	textarea.style("fontSize",fontsize); //26:19 | main.nt
-	resize_textarea(); //27:20 | main.nt
-}); //24:14 | main.nt
+	fontsize+=5; //24:13 | main.nt
+	textarea.style("fontSize",fontsize); //25:19 | main.nt
+	resize_textarea(); //26:20 | main.nt
+}); //23:14 | main.nt
 DOM("#down").on("click",()=>{
-	fontsize-=5; //32:13 | main.nt
-	textarea.style("fontSize",fontsize); //33:19 | main.nt
-	resize_textarea(); //34:20 | main.nt
-}); //31:16 | main.nt
+	fontsize-=5; //31:13 | main.nt
+	textarea.style("fontSize",fontsize); //32:19 | main.nt
+	resize_textarea(); //33:20 | main.nt
+}); //30:16 | main.nt
 DOM("#clear").on("click",()=>{
-	textarea.value=""; //38:13 | main.nt
-	resize_textarea(); //39:20 | main.nt
-}); //37:17 | main.nt
-DOM("#reload").on('click',()=>{
-	location.reload(); //42:20 | main.nt
-}); //41:18 | main.nt
-DOM("#date").innerHTML+=Date.now()+" <  Don't worry about this, Olivia :)"; //45:4 | main.nt
+	textarea.value=""; //37:13 | main.nt
+	resize_textarea(); //38:20 | main.nt
+}); //36:17 | main.nt
+DOM("#date").innerHTML+=Date.now()+" <  Don't worry about this, Olivia :)"; //41:4 | main.nt
 let cards_div=DOM("#cards"); //2:16 | cards.ntm
-let Card=function(name,event){
+let Card=function(name,config,event){
 	let $this=this;let private={};this.$op={};Card.$map.set(name,this);
 	private.name=name; //5:12 | cards.ntm
 	private.event=event; //6:12 | cards.ntm
-	private.element=DOM.createElement("div",cards_div); //9:12 | cards.ntm
+	if(config.border==null){config.border=DOM.color.gray._900;}; //9:11 | cards.ntm
+	private.element=DOM.createElement("div",cards_div); //12:12 | cards.ntm
 	private.element.css({
 		width:window.innerWidth/4-20,
 		height:window.innerWidth/4-20,
 		margin:5,
 		backgroundColor:DOM.color.gray._700,
 		borderRadius:6,
-		border:"5px solid "+DOM.color.gray._900,
+		border:"5px solid "+config.border,
 		display:"flex",
 		float:"left",
 		justifyContent:"center",
 		alignItems:"center"
-	}); //10:24 | cards.ntm
-	private.element.innerHTML=name; //25:12 | cards.ntm
+	}); //13:24 | cards.ntm
+	private.element.innerHTML=name; //28:12 | cards.ntm
 	private.element.on("click",()=>{
-		private.event(); //28:22 | cards.ntm
-	}); //27:23 | cards.ntm
+		private.event(); //31:22 | cards.ntm
+	}); //30:23 | cards.ntm
 }; //4:8 | cards.ntm
 Card.$map=new Map();Card.get=function(id){return Card.$map.get(id);};Card.has=function(id){return Card.$map.has(id);};Card.forEach=function(cb){Card.$map.forEach(cb);};Card.delete=function(cb){Card.$map.delete(cb);}; //4:8 | cards.ntm
-new Card("Card 1",()=>{
-	textarea.value="1"; //39:34 | cards.ntm
-}); //39:11 | cards.ntm
-new Card("Card 2",()=>{
-	textarea.value="2"; //40:34 | cards.ntm
-}); //40:11 | cards.ntm
-new Card("Card 3",()=>{
-	textarea.value="3"; //41:34 | cards.ntm
-}); //41:11 | cards.ntm
-new Card("Card 4",()=>{
-	textarea.value="4"; //42:34 | cards.ntm
+new Card("Reload",{
+	border:DOM.color.orange._900
+},()=>{
+	location.reload(); //45:20 | cards.ntm
 }); //42:11 | cards.ntm
-new Card("Card 5",()=>{
-	textarea.value="5"; //43:34 | cards.ntm
-}); //43:11 | cards.ntm
-new Card("Card 6",()=>{
-	textarea.value="6"; //44:34 | cards.ntm
-}); //44:11 | cards.ntm
+let ssu=new SpeechSynthesisUtterance(); //49:10 | cards.ntm
+let voices=window.speechSynthesis.getVoices(); //50:13 | cards.ntm
+ssu.voice=voices[6]; //51:4 | cards.ntm
+ssu.volume=1; //52:4 | cards.ntm
+ssu.rate=1.15; //53:4 | cards.ntm
+ssu.pitch=1.2; //54:4 | cards.ntm
+ssu.text=""; //55:4 | cards.ntm
+new Card("Speech",{
+	border:DOM.color.teal._700
+},()=>{
+	ssu.text=textarea.value; //61:8 | cards.ntm
+	speechSynthesis.speak(ssu); //62:26 | cards.ntm
+}); //58:11 | cards.ntm
+new Card("Speech Test",{},()=>{
+	textarea.value="Hello, I am Text to Speech. I can saythings, I think; but I'm not 100% sure"; //65:43 | cards.ntm
+}); //65:11 | cards.ntm
+new Card("Card 4",{},()=>{
+	textarea.value="4"; //66:38 | cards.ntm
+}); //66:11 | cards.ntm
+new Card("Card 5",{},()=>{
+	textarea.value="5"; //67:38 | cards.ntm
+}); //67:11 | cards.ntm
+new Card("Card 6",{},()=>{
+	textarea.value="6"; //68:38 | cards.ntm
+}); //68:11 | cards.ntm
