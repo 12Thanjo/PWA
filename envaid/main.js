@@ -24,7 +24,6 @@ DOM("#clear").on("click",()=>{
 	textarea.value=""; //37:13 | main.nt
 	resize_textarea(); //38:20 | main.nt
 }); //36:17 | main.nt
-DOM("#date").innerHTML+=Date.now()+" <  Don't worry about this, Olivia :)"; //41:4 | main.nt
 let cards_div=DOM("#cards"); //2:16 | cards.ntm
 let Card=function(name,config,event){
 	let $this=this;let private={};this.$op={};Card.$map.set(name,this);
