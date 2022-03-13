@@ -1,4 +1,8 @@
 import DOM;
 
 
-DOM("body").innerHTML += "test";
+
+local textarea = DOM("textarea");
+
+textarea.focus();
+
