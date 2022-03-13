@@ -267,9 +267,9 @@ var maximize_card = new Special_Card("Maximize", cyan, ()=>{
 
 //////////////////////////////////////////////////////////////////  
 
-new Special_Card("MyID", red, ()=>{
-    window.open("https://getmyid.com/profile/00nDm8FW");
-}).size(2);
+// new Special_Card("MyID", red, ()=>{
+    // window.open("https://getmyid.com/profile/00nDm8FW");
+// }).size(2);
 
 //////////////////////////////////////////////////////////////////
 
