@@ -50,33 +50,33 @@ let Card=function(name,config,event){
 	}); //30:23 | cards.ntm
 }; //4:8 | cards.ntm
 Card.$map=new Map();Card.get=function(id){return Card.$map.get(id);};Card.has=function(id){return Card.$map.has(id);};Card.forEach=function(cb){Card.$map.forEach(cb);};Card.delete=function(cb){Card.$map.delete(cb);}; //4:8 | cards.ntm
-new Card("Reload",{
-	border:DOM.color.orange._900
-},()=>{
-	location.reload(); //45:20 | cards.ntm
-}); //42:11 | cards.ntm
-let ssu=new SpeechSynthesisUtterance(); //49:10 | cards.ntm
-let voices=window.speechSynthesis.getVoices(); //50:13 | cards.ntm
-ssu.voice=voices[6]; //51:4 | cards.ntm
-ssu.volume=1; //52:4 | cards.ntm
-ssu.rate=1.15; //53:4 | cards.ntm
-ssu.pitch=1.2; //54:4 | cards.ntm
-ssu.text=""; //55:4 | cards.ntm
+let ssu=new SpeechSynthesisUtterance(); //43:10 | cards.ntm
+let voices=window.speechSynthesis.getVoices(); //44:13 | cards.ntm
+ssu.voice=voices[6]; //45:4 | cards.ntm
+ssu.volume=1; //46:4 | cards.ntm
+ssu.rate=1.15; //47:4 | cards.ntm
+ssu.pitch=1.2; //48:4 | cards.ntm
+ssu.text=""; //49:4 | cards.ntm
 new Card("Speech",{
 	border:DOM.color.teal._700
 },()=>{
-	ssu.text=textarea.value; //61:8 | cards.ntm
-	speechSynthesis.speak(ssu); //62:26 | cards.ntm
-}); //58:11 | cards.ntm
+	ssu.text=textarea.value; //55:8 | cards.ntm
+	speechSynthesis.speak(ssu); //56:26 | cards.ntm
+}); //52:11 | cards.ntm
 new Card("Speech Test",{},()=>{
-	textarea.value="Hello, I am Text to Speech. I can saythings, I think; but I'm not 100% sure"; //65:43 | cards.ntm
-}); //65:11 | cards.ntm
+	textarea.value="Hello, I am Text to Speech. I can saythings, I think; but I'm not 100% sure"; //59:43 | cards.ntm
+}); //59:11 | cards.ntm
 new Card("Card 4",{},()=>{
-	textarea.value="4"; //66:38 | cards.ntm
-}); //66:11 | cards.ntm
+	textarea.value="4"; //60:38 | cards.ntm
+}); //60:11 | cards.ntm
 new Card("Card 5",{},()=>{
-	textarea.value="5"; //67:38 | cards.ntm
-}); //67:11 | cards.ntm
+	textarea.value="5"; //61:38 | cards.ntm
+}); //61:11 | cards.ntm
 new Card("Card 6",{},()=>{
-	textarea.value="6"; //68:38 | cards.ntm
-}); //68:11 | cards.ntm
+	textarea.value="6"; //62:38 | cards.ntm
+}); //62:11 | cards.ntm
+new Card("Update",{
+	border:DOM.color.orange._900
+},()=>{
+	location.reload(); //70:20 | cards.ntm
+}); //67:11 | cards.ntm

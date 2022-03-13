@@ -39,12 +39,6 @@ species Card(name, config, event){
 
 
 
-spawn Card("Reload", {
-	border: DOM.color.orange._900,
-}, @()->{
-	location.reload();
-});
-
 
 local ssu = new SpeechSynthesisUtterance();
 local voices = window.speechSynthesis.getVoices();
@@ -66,3 +60,12 @@ spawn Card("Speech Test", {}, @()->{textarea.value = "Hello, I am Text to Speech
 spawn Card("Card 4", {}, @()->{textarea.value = "4";});
 spawn Card("Card 5", {}, @()->{textarea.value = "5";});
 spawn Card("Card 6", {}, @()->{textarea.value = "6";});
+
+
+
+
+spawn Card("Update", {
+	border: DOM.color.orange._900,
+}, @()->{
+	location.reload();
+});
