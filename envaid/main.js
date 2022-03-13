@@ -3,20 +3,29 @@ $pending_plugins.set('DOM',()=>{let plugin={metadata:{"name":"DOM","version":"0.
 for(var[$key,$value]of $pending_plugins.entries()){$get_plugin($key);};
 let DOM=$plugins.get('DOM'); //1:7
 let textarea=DOM("#textarea"); //4:15 | main.nt
-let fontsize=Math.floor(window.innerHeight*0.1); //6:15 | main.nt
+let fontsize=Math.floor(window.innerHeight*0.09); //6:15 | main.nt
 textarea.style("fontSize",fontsize); //7:15 | main.nt
 resize_textarea=function(){ //13:26 | main.nt
 	textarea.style('height',5); //14:19 | main.nt
-	textarea.style('height',textarea.element.scrollHeight-10); //15:19 | main.nt
+	textarea.style('height',textarea.element.scrollHeight-20); //15:19 | main.nt
+	console.log("hi"); //16:16 | main.nt
 }; //13:16 | main.nt
-resize_textarea(); //17:16 | main.nt
+resize_textarea(); //18:16 | main.nt
 DOM("#up").on("click",()=>{
-	fontsize+=5; //24:13 | main.nt
-	textarea.style("fontSize",fontsize); //25:19 | main.nt
-	resize_textarea(); //26:20 | main.nt
-}); //23:14 | main.nt
+	fontsize+=5; //25:13 | main.nt
+	textarea.style("fontSize",fontsize); //26:19 | main.nt
+	resize_textarea(); //27:20 | main.nt
+}); //24:14 | main.nt
 DOM("#down").on("click",()=>{
-	fontsize-=5; //31:13 | main.nt
-	textarea.style("fontSize",fontsize); //32:19 | main.nt
-	resize_textarea(); //33:20 | main.nt
-}); //30:16 | main.nt
+	fontsize-=5; //32:13 | main.nt
+	textarea.style("fontSize",fontsize); //33:19 | main.nt
+	resize_textarea(); //34:20 | main.nt
+}); //31:16 | main.nt
+DOM("#clear").on("click",()=>{
+	textarea.value=""; //38:13 | main.nt
+	resize_textarea(); //39:20 | main.nt
+}); //37:17 | main.nt
+DOM("#reload").on('click',()=>{
+	location.reload(); //42:20 | main.nt
+}); //41:18 | main.nt
+DOM("#date").innerHTML+=Date.now(); //45:4 | main.nt

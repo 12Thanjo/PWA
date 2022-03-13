@@ -3,7 +3,7 @@ import DOM;
 
 local textarea = DOM("#textarea");
 
-local fontsize = Math.floor( 10  /100*window.innerHeight);
+local fontsize = Math.floor( 9  /100*window.innerHeight);
 textarea.style("fontSize", fontsize);
 
 // textarea.on("touchend", @()->{
@@ -13,6 +13,7 @@ textarea.style("fontSize", fontsize);
 resize_textarea = function(){
 	textarea.style('height', 5);
 	textarea.style('height', textarea.element.scrollHeight - 20);
+	console.log("hi");
 };
 resize_textarea();
 
@@ -32,3 +33,13 @@ DOM("#down").on("click", @()->{
 	textarea.style("fontSize", fontsize);
 	resize_textarea();
 });
+
+DOM("#clear").on("click", @()->{
+	textarea.value = "";
+	resize_textarea();
+});
+DOM("#reload").on('click', @()->{
+	location.reload();
+});
+
+DOM("#date").innerHTML += Date.now();

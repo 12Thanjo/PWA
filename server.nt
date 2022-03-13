@@ -17,6 +17,9 @@ ferry.get("/colors.css", @(req, res)->{
 ferry.get("/main.js", @(req, res)->{
 	res.sendFile(__dirname + "/envaid/main.js");
 });
+ferry.get("/icon.png", @(req, res)->{
+	res.sendFile(__dirname + "/envaid/icon.png");
+});
 
 
 

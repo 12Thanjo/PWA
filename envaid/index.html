@@ -18,7 +18,7 @@
 				overflow-x: hidden;
 
 				background: var(--coolGray_800);
-				color: var(--coolGray_100);
+				color: var(--coolGray_200);
 
 				font-family: "Helvetica", "Sans-serif";
 			}
@@ -31,7 +31,7 @@
 				outline: none;
 
 				background: var(--coolGray_700);
-				color: var(--coolGray_50);
+				color: var(--coolGray_200);
 				font-family: "Helvetica", "Sans-serif";
 				border-radius: 0px;
 
@@ -44,20 +44,21 @@
 
 			}
 
-			#up, #down, #speak, #tools{
-				background-color: #555555;
+			#up, #down, #clear{
+				background-color: var(--gray_700);
 				height: 15vw;
 				float: left;
 				margin: 0px;
+				transform: translate(0%, -7%);
 			}
 
 			#up, #down{
-				width: 20vw;
+				width: 25vw;
 				font-size: 3vw;
 			}
 
-			#speak, #tools{
-				width: 30vw;
+			#clear{
+				width: 50vw;
 				font-size: 3vw;
 			}
 			
@@ -67,22 +68,28 @@
 		<div id="header">
 			<textarea id="textarea" oninput="resize_textarea()"></textarea>
 			<div id="buttons">
+				<div id="clear">
+					<h1>Clear</h1>
+				</div>
 	    		<div id="up">
 	    			<h1>↑</h1>
 	    		</div>
 	    		<div id="down">
 	    			<h1>↓</h1>
 	    		</div>
-	    		<div id="speak">
-	    			<h1>{Speak}</h1>
-	    		</div>
-	    		<div id="tools">
-	    			<h1>{Special}</h1>
-	    		</div>
+
+
+
     		</div>
+
+
 		</div>
 
 
+	    		<div id="reload" onclick="location.reload()">
+	    			<h1>Reload</h1>
+	    			<p id="date"></p>
+	    		</div>
 
 		<script type="text/javascript" src="main.js"></script>
 	</body>

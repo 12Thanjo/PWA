@@ -19,25 +19,28 @@ ferry.get("/colors.css",(req,res)=>{
 ferry.get("/main.js",(req,res)=>{
 	res.sendFile(__dirname+"/envaid/main.js"); //18:17 | server.nt
 }); //17:10 | server.nt
-ferry.start(); //23:12 | server.nt
-let os=require("os"); //30:9 | server.nt
-let nets=os.networkInterfaces(); //33:11 | server.nt
-let results={}; //34:14 | server.nt
+ferry.get("/icon.png",(req,res)=>{
+	res.sendFile(__dirname+"/envaid/icon.png"); //21:17 | server.nt
+}); //20:10 | server.nt
+ferry.start(); //26:12 | server.nt
+let os=require("os"); //33:9 | server.nt
+let nets=os.networkInterfaces(); //36:11 | server.nt
+let results={}; //37:14 | server.nt
 for(let name in nets){
 	let net=nets[name];
 	for(let i in net){
 		let sub_net=net[i];
 		if(sub_net.family=="IPv4"){
 			if(results[name]==null){
-				results[name]=[]; //40:24 | server.nt
-			}; //39:15 | server.nt
-			results[name].push(sub_net.address); //42:31 | server.nt
-		}; //38:11 | server.nt
-	}; //37:12 | server.nt
-}; //36:8 | server.nt
-console.log("-------------------------"); //47:12 | server.nt
+				results[name]=[]; //43:24 | server.nt
+			}; //42:15 | server.nt
+			results[name].push(sub_net.address); //45:31 | server.nt
+		}; //41:11 | server.nt
+	}; //40:12 | server.nt
+}; //39:8 | server.nt
+console.log("-------------------------"); //50:12 | server.nt
 for(let key in results){
 	let address=results[key];
-	console.log(key,address); //49:16 | server.nt
-}; //48:8 | server.nt
-console.log("-------------------------"); //51:12 | server.nt
+	console.log(key,address); //52:16 | server.nt
+}; //51:8 | server.nt
+console.log("-------------------------"); //54:12 | server.nt
