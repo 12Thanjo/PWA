@@ -1,0 +1,71 @@
+
+local cards_div = DOM("#cards");
+
+species Card(name, config, event){
+	private.name = name;
+	private.event = event;
+
+
+	config.border default DOM.color.gray._900;
+
+	
+	private.element = DOM.createElement("div", cards_div);
+	private.element.css({
+		width: window.innerWidth / 4 - 20,
+		height: window.innerWidth / 4 - 20,
+		margin: 5,
+
+		backgroundColor: DOM.color.gray._700,
+		borderRadius: 6,
+		border: "5px solid " + config.border,
+		
+		display: "flex",
+		float: "left",
+
+		justifyContent: "center",
+		alignItems: "center",
+	});
+	private.element.innerHTML = name;
+
+	private.element.on("click", @()->{
+		private.event();
+	});
+};
+
+
+// Card.forEach(@(card)->{
+
+// });
+
+
+
+
+local ssu = new SpeechSynthesisUtterance();
+local voices = window.speechSynthesis.getVoices();
+ssu.voice = voices[6];
+ssu.volume = 1; // From 0 to 1
+ssu.rate = 1.0; // From 0.1 to 10
+ssu.pitch = 1.2; // From 0 to 2
+ssu.text = "";
+// ssu.lang = 'fr';
+
+spawn Card("Speech", {
+	border: DOM.color.teal._700,
+}, @()->{
+	ssu.text = textarea.value;
+	speechSynthesis.speak(ssu);
+});
+
+spawn Card("Speech Test", {}, @()->{textarea.value = "Hello, I am Text to Speech. I can saythings, I think; but I'm not 100% sure";});
+spawn Card("Card 4", {}, @()->{textarea.value = "4";});
+spawn Card("Card 5", {}, @()->{textarea.value = "5";});
+spawn Card("Card 6", {}, @()->{textarea.value = "6";});
+
+
+
+
+spawn Card("Update", {
+	border: DOM.color.orange._900,
+}, @()->{
+	location.reload();
+});

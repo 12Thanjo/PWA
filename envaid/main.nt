@@ -1,0 +1,46 @@
+import DOM;
+
+
+local textarea = DOM("#textarea");
+
+local fontsize = Math.floor( 9  /100*window.innerHeight);
+textarea.style("fontSize", fontsize);
+
+// textarea.on("touchend", @()->{
+	// textarea.focus();
+// });
+
+resize_textarea = function(){
+	textarea.style('height', 5);
+	textarea.style('height', textarea.element.scrollHeight - 20);
+};
+resize_textarea();
+
+
+
+
+// buttons /////////////////////////////////////////////////
+DOM("#up").on("click", @()->{
+	fontsize += 5;
+	textarea.style("fontSize", fontsize);
+	resize_textarea();
+});
+
+
+DOM("#down").on("click", @()->{
+	fontsize -= 5;
+	textarea.style("fontSize", fontsize);
+	resize_textarea();
+});
+
+DOM("#clear").on("click", @()->{
+	textarea.value = "";
+	resize_textarea();
+});
+
+
+
+
+
+
+macro "cards";

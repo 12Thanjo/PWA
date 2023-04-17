@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="viewport" id="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link rel="apple-touch-icon" href="icon.png"/>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Envaid</title>
+
+		<link rel="stylesheet" href="colors.css">
+		<style type="text/css">
+
+			body{
+				overflow: hidden;
+				overflow-y: auto;
+
+				margin: 0px;
+				overflow-x: hidden;
+
+				background: var(--coolGray_800);
+				color: var(--coolGray_200);
+
+				font-family: "Helvetica", "Sans-serif";
+			}
+
+			#textarea {
+				width: calc(100% - 20px);
+				margin: 0px;
+				border-width: 0px;
+				padding: 10px;
+				outline: none;
+
+				background: var(--coolGray_700);
+				color: var(--coolGray_200);
+				font-family: "Helvetica", "Sans-serif";
+				border-radius: 0px;
+
+				font-size: 7vh;
+			}
+
+			#buttons{
+				display: block;
+				text-align: center;
+			}
+
+			#up, #down, #clear{
+				background-color: var(--gray_700);
+				height: 15vw;
+				float: left;
+				margin: 0px;
+				transform: translate(0%, -7%);
+			}
+
+			#up, #down{
+				width: 25vw;
+				font-size: 3vw;
+			}
+
+			#clear{
+				width: 50vw;
+				font-size: 3vw;
+			}
+
+
+
+
+			#cards{
+				display: block;
+				text-align: center;
+				float: left;
+			}
+
+			
+		</style>
+	</head>
+	<body>
+		<div id="header">
+			<textarea id="textarea" oninput="resize_textarea()"></textarea>
+			<div id="buttons">
+				<div id="clear">
+					<h1>Clear</h1>
+				</div>
+	    		<div id="up">
+	    			<h1>↑</h1>
+	    		</div>
+	    		<div id="down">
+	    			<h1>↓</h1>
+	    		</div>
+    		</div>
+
+    		<div id="cards"></div>
+
+		</div>
+
+		<script type="text/javascript" src="main.js"></script>
+	</body>
+</html>
